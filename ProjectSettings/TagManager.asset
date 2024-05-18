@@ -41,3 +41,15 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: Ground
+    uniqueID: 1704619501
+    locked: 0
+  - name: Obstacle
+    uniqueID: 1743115181
+    locked: 0
+  - name: Character
+    uniqueID: 1023919653
+    locked: 0
+  - name: UI
+    uniqueID: 1877253401
+    locked: 0
