@@ -189,9 +189,9 @@ TextureImporter:
       name: BattleScreen-Sheet_3
       rect:
         serializedVersion: 2
-        x: 341
+        x: 360
         y: 441
-        width: 67
+        width: 48
         height: 23
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
@@ -1445,6 +1445,195 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
+    - serializedVersion: 2
+      name: BattleScreen-Sheet_63
+      rect:
+        serializedVersion: 2
+        x: 17
+        y: 367
+        width: 48
+        height: 48
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ffc120e88da5e6c45a61ba3a026848a5
+      internalID: -996881374
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BattleScreen-Sheet_64
+      rect:
+        serializedVersion: 2
+        x: 185
+        y: 273
+        width: 80
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d82c2f3582851144a844717dbfd8be6a
+      internalID: 2076040352
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BattleScreen-Sheet_65
+      rect:
+        serializedVersion: 2
+        x: 247
+        y: 209
+        width: 80
+        height: 24
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e0f32fce69bcef64e9d1a17282b80266
+      internalID: 1595173390
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BattleScreen-Sheet_66
+      rect:
+        serializedVersion: 2
+        x: 99
+        y: 408
+        width: 48
+        height: 56
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 126218559d195f44fbbb0070d5d9cb00
+      internalID: 994635202
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BattleScreen-Sheet_67
+      rect:
+        serializedVersion: 2
+        x: 185
+        y: 433
+        width: 80
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cb2b47a0e9efa084a8d02c93d9504f91
+      internalID: -1018436995
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BattleScreen-Sheet_68
+      rect:
+        serializedVersion: 2
+        x: 247
+        y: 369
+        width: 80
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d7487b73d85d0f145b8b6414d8abc415
+      internalID: 2000387376
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BattleScreen-Sheet_69
+      rect:
+        serializedVersion: 2
+        x: 341
+        y: 453
+        width: 7
+        height: 7
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: aadc696393bdb41418aa2d9cc10e6d57
+      internalID: -1257674406
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BattleScreen-Sheet_70
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 208
+        width: 48
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 127b5a6aa20c95e4b9505c7a69e238bc
+      internalID: 1669708502
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: BattleScreen-Sheet_71
+      rect:
+        serializedVersion: 2
+        x: 100
+        y: 248
+        width: 48
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 18f86014f34fe2d4a872852f258f5cf9
+      internalID: -750828718
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
@@ -1516,7 +1705,16 @@ TextureImporter:
       BattleScreen-Sheet_60: -1383343710
       BattleScreen-Sheet_61: 94953407
       BattleScreen-Sheet_62: -602613278
+      BattleScreen-Sheet_63: -996881374
+      BattleScreen-Sheet_64: 2076040352
+      BattleScreen-Sheet_65: 1595173390
+      BattleScreen-Sheet_66: 994635202
+      BattleScreen-Sheet_67: -1018436995
+      BattleScreen-Sheet_68: 2000387376
+      BattleScreen-Sheet_69: -1257674406
       BattleScreen-Sheet_7: 1024926684
+      BattleScreen-Sheet_70: 1669708502
+      BattleScreen-Sheet_71: -750828718
       BattleScreen-Sheet_8: 1510528385
       BattleScreen-Sheet_9: -1403723504
   mipmapLimitGroupName: 
