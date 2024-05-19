@@ -12,6 +12,9 @@ public class BattleManager : MonoBehaviour
     public PokemonTrainer enemy;
     public PokemonTrainer player;
 
+    public Pokemon enemyPokemon;
+    public Pokemon playerPokemon;
+
     public Image enemyPortraitImage;
     public Image playerPortraitImage;
 
@@ -26,6 +29,12 @@ public class BattleManager : MonoBehaviour
 
     public TextMeshProUGUI dialogueText;
 
+    private int selectedActionIndex = 0;
+    public GameObject actionSelectPanel;
+    public GameObject[] actionSelectCursors;
+
+    public bool isBattleLoop;
+
     private void Awake()
     {
         if (Instance == null) Instance = this;
@@ -33,6 +42,8 @@ public class BattleManager : MonoBehaviour
 
     public void StartBattle(PokemonTrainer enemy)
     {
+        PlayerController.Instance.DisableInput();
+
         this.enemy = enemy;
         battleScreenPanel.SetActive(true);
 
@@ -42,6 +53,8 @@ public class BattleManager : MonoBehaviour
     public IEnumerator BattleLoop()
     {
         // Init
+        isBattleLoop = true;
+
         dialogueText.text = "";
 
         enemyPokeballMonitor.gameObject.SetActive(false);
@@ -56,11 +69,65 @@ public class BattleManager : MonoBehaviour
         enemyPokemonMonitor.gameObject.SetActive(false);
         playerPokemonMonitor.gameObject.SetActive(false);
 
+        actionSelectPanel.SetActive(false);
+
         //Setup
         yield return StartCoroutine(SetupBattle());
 
-        yield return StartCoroutine(EnemySentOut(enemy.ownPokemons[0]));
-        yield return StartCoroutine(PlayerSentOut(player.ownPokemons[0]));
+        yield return StartCoroutine(EnemySentOut(enemy.AutoSentOutPokemon()));
+        yield return StartCoroutine(PlayerSentOut(player.AutoSentOutPokemon()));
+
+        while (isBattleLoop)
+        {
+            yield return StartCoroutine(ActionSelect());
+
+            if(selectedActionIndex == 0)
+            {
+                yield return StartCoroutine(Attack(playerPokemon, enemyPokemon, enemyPokemonMonitor));
+
+                if(enemyPokemon.currentHp <= 0)
+                {
+                    dialogueText.text = $"{enemyPokemon.name}(이)가 쓰러졌다!";
+                    yield return new WaitForSeconds(0.5f);
+                    enemyPokemonPortraitImage.gameObject.SetActive(false);
+                    enemyPokemonMonitor.gameObject.SetActive(false);
+
+                    yield return new WaitForSeconds(0.5f);
+
+                    enemyPortraitImage.gameObject.SetActive(true);
+                    enemyPokeballMonitor.gameObject.SetActive(true);
+                    enemyPokeballMonitor.Set(enemy.ownPokemons);
+
+                    yield return new WaitForSeconds(1f);
+
+                    yield return StartCoroutine(EnemySentOut(enemy.AutoSentOutPokemon()));
+                }
+                else
+                {
+                    yield return new WaitForSeconds(1f);
+
+                    yield return StartCoroutine(Attack(enemyPokemon, playerPokemon, playerPokemonMonitor));
+
+                    if(playerPokemon.currentHp <= 0)
+                    {
+                        dialogueText.text = $"{playerPokemon.name}(이)가 쓰러졌다!";
+                        yield return new WaitForSeconds(0.5f);
+                        isBattleLoop = false;
+                    }
+                }
+            }
+            else if(selectedActionIndex == 1)
+            {
+                isBattleLoop = false;
+            }
+            else if(selectedActionIndex == 2)
+            {
+
+            }
+        }
+        
+        battleScreenPanel.SetActive(false);
+        PlayerController.Instance.EnableInput();
     }
 
     public IEnumerator SetupBattle()
@@ -91,10 +158,16 @@ public class BattleManager : MonoBehaviour
         playerPokeballMonitor.gameObject.SetActive(false);
 
         yield return new WaitForSeconds(1f);
+
+        dialogueText.text = "";
     }
 
     public IEnumerator EnemySentOut(Pokemon pokemon)
     {
+        enemyPortraitImage.gameObject.SetActive(false);
+        enemyPokeballMonitor.gameObject.SetActive(false);
+
+        enemyPokemon = pokemon;
         dialogueText.text = $"{enemy.name}는 {pokemon.name}을 내보냈다!";
 
         yield return new WaitForSeconds(1f);
@@ -108,10 +181,13 @@ public class BattleManager : MonoBehaviour
         enemyPokemonMonitor.Set(pokemon);
 
         yield return new WaitForSeconds(1f);
+
+        dialogueText.text = "";
     }
 
     public IEnumerator PlayerSentOut(Pokemon pokemon)
     {
+        playerPokemon = pokemon;
         playerPortraitImage.gameObject.SetActive(false);
 
         yield return new WaitForSeconds(1f);
@@ -127,5 +203,70 @@ public class BattleManager : MonoBehaviour
 
         playerPokemonMonitor.gameObject.SetActive(true);
         playerPokemonMonitor.Set(pokemon);
+
+        dialogueText.text = "";
+    }
+
+    public IEnumerator ActionSelect()
+    {
+        actionSelectPanel.SetActive(true);
+
+        for(int i=0; i<actionSelectCursors.Length; i++)
+        {
+            if (i == selectedActionIndex) actionSelectCursors[i].SetActive(true);
+            else actionSelectCursors[i].SetActive(false);
+        }
+
+        while (!Input.GetKeyDown(KeyCode.E))
+        {
+            float input = Input.GetAxisRaw("Horizontal");
+            if (input < 0)
+            {
+                if(--selectedActionIndex < 0) selectedActionIndex = actionSelectCursors.Length - 1;
+
+                for (int i = 0; i < actionSelectCursors.Length; i++)
+                {
+                    if (i == selectedActionIndex) actionSelectCursors[i].SetActive(true);
+                    else actionSelectCursors[i].SetActive(false);
+                }
+
+                yield return new WaitForSeconds(0.5f);
+            }
+            else if (input > 0)
+            {
+                if(++selectedActionIndex == actionSelectCursors.Length) selectedActionIndex = 0;
+
+                for (int i = 0; i < actionSelectCursors.Length; i++)
+                {
+                    if (i == selectedActionIndex) actionSelectCursors[i].SetActive(true);
+                    else actionSelectCursors[i].SetActive(false);
+                }
+
+                yield return new WaitForSeconds(0.25f);
+            }
+
+            yield return null;
+        }
+
+        actionSelectPanel.SetActive(false);
+    }
+
+    private IEnumerator Attack(Pokemon attacker, Pokemon target, PokemonMonitor targetMonitor)
+    {
+        dialogueText.text = $"{attacker.name}가 공격했다!";
+
+        yield return new WaitForSeconds(0.5f);
+        int damage = attacker.power;
+
+        target.currentHp -= damage;
+        targetMonitor.Set(target);
+
+        yield return new WaitForSeconds(0.5f);
+
+        dialogueText.text = $"{target.name}가 {damage} 피해를 입었다!";
+
+        yield return new WaitForSeconds(0.5f);
+
+        dialogueText.text = "";
     }
 }

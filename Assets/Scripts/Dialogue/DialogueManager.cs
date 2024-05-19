@@ -70,7 +70,7 @@ public class DialogueManager : MonoBehaviour
     void EndDialogue()
     {
         dialoguePanel.SetActive(false);
-        currentDialogueEndEvent?.Invoke();
         PlayerController.Instance.EnableInput();
+        currentDialogueEndEvent?.Invoke();
     }
 }

@@ -10,6 +10,7 @@ public class Pokemon
     public int level;
     public int maxHp;
     public int currentHp;
+    public int power = 5;
     public Type type;
     public List<Skill> skills;
 
