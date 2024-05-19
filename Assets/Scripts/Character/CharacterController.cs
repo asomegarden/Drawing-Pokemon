@@ -24,9 +24,10 @@ public class CharacterController : MonoBehaviour
 
             if(GetComponent<Collider>() == null)
             {
-                if (moveDirection.x != 0)
+                if (moveDirection.x != 0 || moveDirection.y != 0)
                 {
                     animator.SetFloat("dirX", moveDirection.x);
+                    animator.SetFloat("dirY", moveDirection.y);
                 }
 
                 Collider2D collider = GetCollider(newPosition, "Obstacle");
