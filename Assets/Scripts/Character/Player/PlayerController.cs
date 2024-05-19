@@ -6,11 +6,20 @@ using UnityEngine.TextCore.Text;
 using UnityEngine.U2D.Animation;
 using static UnityEngine.GraphicsBuffer;
 
-public class PlayerController : CharacterController
+public class PlayerController : HumanController
 {
+    private Vector3 lookDirection;
+    private InteractObject currentInteractable;
+    private bool hasInteract = false;
+    public TextMeshProUGUI inputIndicateText;
+
     private void Update()
     {
-        HandleInput();
+        if (!isMoving)
+        {
+            if(!hasInteract) GetInteractable();
+            HandleInput();
+        }
     }
 
     protected override void HandleCollider(Collider2D collider)
@@ -20,7 +29,15 @@ public class PlayerController : CharacterController
 
     private void HandleInput()
     {
-        if (isMoving) return;
+        if(currentInteractable != null)
+        {
+            if(Input.GetKeyDown(currentInteractable.triggerKey))
+            {
+                currentInteractable.TriggerInteraction();
+                currentInteractable = null;
+            }
+        }
+
         Vector3 moveDirection = Vector3.zero;
 
         float horizontalInput = Input.GetAxis("Horizontal");
@@ -38,6 +55,28 @@ public class PlayerController : CharacterController
             moveDirection = verticalInput > 0 ? Vector3.up : Vector3.down;
         }
 
-        MoveCommand(moveDirection);
+        if(moveDirection != Vector3.zero)
+        {
+            hasInteract = false;
+            currentInteractable = null;
+            inputIndicateText.text = $"";
+            lookDirection = moveDirection;
+            MoveCommand(moveDirection);
+        }
+    }
+
+    private void GetInteractable()
+    {
+        hasInteract = true;
+        Collider2D collider = GetCollider(transform.position + lookDirection, "Interactable");
+
+        if(collider != null)
+        {
+            currentInteractable = collider.GetComponent<InteractObject>();
+            if(currentInteractable != null)
+            {
+                inputIndicateText.text = $"[{currentInteractable.triggerKey}] Interaction";
+            }
+        }
     }
 }

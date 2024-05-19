@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.TextCore.Text;
 
-public class CharacterController : MonoBehaviour
+public class HumanController : MonoBehaviour
 {
     public Animator animator;
 
@@ -22,7 +22,7 @@ public class CharacterController : MonoBehaviour
         {
             Vector3 newPosition = this.transform.position + moveDirection;
 
-            if(GetComponent<Collider>() == null)
+            if (GetComponent<Collider>() == null)
             {
                 if (moveDirection.x != 0 || moveDirection.y != 0)
                 {
@@ -30,7 +30,7 @@ public class CharacterController : MonoBehaviour
                     animator.SetFloat("dirY", moveDirection.y);
                 }
 
-                Collider2D collider = GetCollider(newPosition, "Obstacle");
+                Collider2D collider = GetCollider(newPosition, "Obstacle", "Interactable");
 
                 if (collider == null)
                 {
