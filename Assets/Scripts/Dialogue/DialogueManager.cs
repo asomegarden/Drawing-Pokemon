@@ -10,12 +10,13 @@ public class DialogueManager : MonoBehaviour
 
     public GameObject dialoguePanel;
     public TextMeshProUGUI dialogueText;
+    public KeyCode nextSentenceKey = KeyCode.E;
     private Queue<string> sentences;
     private UnityEvent currentDialogueEndEvent;
 
     private void Awake()
     {
-        if(Instance == null) Instance = this;
+        if (Instance == null) Instance = this;
     }
 
     void Start()
@@ -34,7 +35,24 @@ public class DialogueManager : MonoBehaviour
         }
 
         currentDialogueEndEvent = dialogue.dialogueEndEvent;
+        PlayerController.Instance.DisableInput();
         DisplayNextSentence();
+
+        StartCoroutine(InputCoroutine());
+    }
+
+    private IEnumerator InputCoroutine()
+    {
+        yield return new WaitForFixedUpdate();
+        while (dialoguePanel.activeSelf)
+        {
+            if (Input.GetKeyDown(nextSentenceKey))
+            {
+                DisplayNextSentence();
+            }
+
+            yield return null;
+        }
     }
 
     public void DisplayNextSentence()
@@ -53,5 +71,6 @@ public class DialogueManager : MonoBehaviour
     {
         dialoguePanel.SetActive(false);
         currentDialogueEndEvent?.Invoke();
+        PlayerController.Instance.EnableInput();
     }
 }

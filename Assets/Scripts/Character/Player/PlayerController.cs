@@ -4,20 +4,26 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.TextCore.Text;
 using UnityEngine.U2D.Animation;
-using static UnityEngine.GraphicsBuffer;
 
 public class PlayerController : HumanController
 {
+    public static PlayerController Instance { get; private set; }
     private Vector3 lookDirection;
     private InteractObject currentInteractable;
     private bool hasInteract = false;
     public TextMeshProUGUI inputIndicateText;
+    private bool inputEnabled = true;
+
+    private void Awake()
+    {
+        if (Instance == null) Instance = this;
+    }
 
     private void Update()
     {
-        if (!isMoving)
+        if (!isMoving && inputEnabled)
         {
-            if(!hasInteract) GetInteractable();
+            if (!hasInteract) GetInteractable();
             HandleInput();
         }
     }
@@ -29,9 +35,9 @@ public class PlayerController : HumanController
 
     private void HandleInput()
     {
-        if(currentInteractable != null)
+        if (currentInteractable != null)
         {
-            if(Input.GetKeyDown(currentInteractable.triggerKey))
+            if (Input.GetKeyDown(currentInteractable.triggerKey))
             {
                 currentInteractable.TriggerInteraction();
                 currentInteractable = null;
@@ -55,7 +61,7 @@ public class PlayerController : HumanController
             moveDirection = verticalInput > 0 ? Vector3.up : Vector3.down;
         }
 
-        if(moveDirection != Vector3.zero)
+        if (moveDirection != Vector3.zero)
         {
             hasInteract = false;
             currentInteractable = null;
@@ -70,13 +76,23 @@ public class PlayerController : HumanController
         hasInteract = true;
         Collider2D collider = GetCollider(transform.position + lookDirection, "Interactable");
 
-        if(collider != null)
+        if (collider != null)
         {
             currentInteractable = collider.GetComponent<InteractObject>();
-            if(currentInteractable != null)
+            if (currentInteractable != null)
             {
                 inputIndicateText.text = $"{currentInteractable.interactionName}[{currentInteractable.triggerKey}]";
             }
         }
+    }
+
+    public void DisableInput()
+    {
+        inputEnabled = false;
+    }
+
+    public void EnableInput()
+    {
+        inputEnabled = true;
     }
 }
