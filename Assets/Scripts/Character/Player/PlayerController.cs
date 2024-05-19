@@ -40,7 +40,6 @@ public class PlayerController : HumanController
             if (Input.GetKeyDown(currentInteractable.triggerKey))
             {
                 currentInteractable.TriggerInteraction();
-                currentInteractable = null;
             }
         }
 
