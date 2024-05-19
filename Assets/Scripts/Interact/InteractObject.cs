@@ -5,6 +5,7 @@ using UnityEngine.Events;
 
 public class InteractObject : MonoBehaviour
 {
+    public string interactionName;
     public KeyCode triggerKey;
     public UnityEvent interactionEvent;
 
