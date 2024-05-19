@@ -75,7 +75,7 @@ public class PlayerController : HumanController
             currentInteractable = collider.GetComponent<InteractObject>();
             if(currentInteractable != null)
             {
-                inputIndicateText.text = $"[{currentInteractable.triggerKey}] {currentInteractable.interactionName}";
+                inputIndicateText.text = $"{currentInteractable.interactionName}[{currentInteractable.triggerKey}]";
             }
         }
     }
