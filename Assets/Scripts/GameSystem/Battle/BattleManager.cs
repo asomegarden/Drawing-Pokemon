@@ -104,7 +104,7 @@ public class BattleManager : MonoBehaviour
         while (isBattleLoop)
         {
             yield return StartCoroutine(PlayerAction());
-            yield return StartCoroutine(EnemyAction());
+            if (isBattleLoop) yield return StartCoroutine(EnemyAction());
         }
 
         EndBattle();
@@ -373,6 +373,7 @@ public class BattleManager : MonoBehaviour
 
     private IEnumerator Runaway()
     {
+        yield return new WaitForSeconds(0.25f);
         dialogueText.text = $"{enemy.name}¿¡°Ô¼­ µµ¸ÁÃÆ´Ù.";
         
         yield return new WaitUntil(() => Input.GetKeyDown(KeyCode.E) == true);
