@@ -375,13 +375,6 @@ MonoBehaviour:
     currentHp: 5
     power: 5
     type: 1
-    skills:
-    - name: "\uBB3C\uB300\uD3EC"
-      type: 1
-      damage: 5
-    - name: "\uBB3C\uAE30"
-      type: 3
-      damage: 5
     portrait: {fileID: 1669708502, guid: 47cff00413ec78e4ca7fd26ce1ba54f8, type: 3}
   - name: "\uD30C\uC774\uB9AC"
     level: 1
@@ -389,13 +382,6 @@ MonoBehaviour:
     currentHp: 5
     power: 5
     type: 0
-    skills:
-    - name: "\uBD88\uAF43\uC138\uB840"
-      type: 0
-      damage: 5
-    - name: "\uBAB8\uD1B5\uBC15\uCE58\uAE30"
-      type: 3
-      damage: 5
     portrait: {fileID: 1669708502, guid: 47cff00413ec78e4ca7fd26ce1ba54f8, type: 3}
 --- !u!1 &49415655
 GameObject:
@@ -573,7 +559,6 @@ MonoBehaviour:
     currentHp: 0
     power: 5
     type: 0
-    skills: []
     portrait: {fileID: 0}
   playerPokemon:
     name: 
@@ -582,7 +567,6 @@ MonoBehaviour:
     currentHp: 0
     power: 5
     type: 0
-    skills: []
     portrait: {fileID: 0}
   enemyPortraitImage: {fileID: 306313928}
   playerPortraitImage: {fileID: 1505280966}
@@ -4026,7 +4010,6 @@ MonoBehaviour:
     currentHp: 0
     power: 5
     type: 0
-    skills: []
     portrait: {fileID: 0}
   isSelected: 0
 --- !u!114 &502949740
@@ -7311,13 +7294,6 @@ MonoBehaviour:
     currentHp: 10
     power: 5
     type: 0
-    skills:
-    - name: "\uBD88\uAF43\uC138\uB840"
-      type: 0
-      damage: 5
-    - name: "\uBAB8\uD1B5\uBC15\uCE58\uAE30"
-      type: 3
-      damage: 5
     portrait: {fileID: -750828718, guid: 47cff00413ec78e4ca7fd26ce1ba54f8, type: 3}
   - name: "\uAF2C\uBD80\uAE30"
     level: 1
@@ -7325,13 +7301,6 @@ MonoBehaviour:
     currentHp: 15
     power: 5
     type: 1
-    skills:
-    - name: "\uBB3C\uB300\uD3EC"
-      type: 1
-      damage: 5
-    - name: "\uBB3C\uAE30"
-      type: 3
-      damage: 5
     portrait: {fileID: -750828718, guid: 47cff00413ec78e4ca7fd26ce1ba54f8, type: 3}
 --- !u!1 &755843880
 GameObject:
@@ -51652,6 +51621,7 @@ Transform:
   m_Children:
   - {fileID: 1249655957}
   - {fileID: 116942451}
+  - {fileID: 1296429047}
   m_Father: {fileID: 642262767}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &972047241
@@ -54201,6 +54171,172 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1293057851}
   m_CullTransparentMesh: 1
+--- !u!1 &1296429046
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1296429047}
+  - component: {fileID: 1296429050}
+  - component: {fileID: 1296429049}
+  - component: {fileID: 1296429048}
+  - component: {fileID: 1296429051}
+  m_Layer: 7
+  m_Name: Computer
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1296429047
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1296429046}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -15, y: -36, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 967465147}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1296429048
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1296429046}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6847c4a5a990add4c9304a02a18879a8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  interactionName: "\uD3EC\uCF13\uBAAC \uD68D\uB4DD"
+  triggerKey: 101
+  interactionEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1296429051}
+        m_TargetAssemblyTypeName: DialogueTrigger, Assembly-CSharp
+        m_MethodName: TriggerDialogue
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!50 &1296429049
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1296429046}
+  m_BodyType: 2
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
+--- !u!61 &1296429050
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1296429046}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 2, y: 2}
+  m_EdgeRadius: 0
+--- !u!114 &1296429051
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1296429046}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c2bc88977d45a714e8b9b8e09d056bda, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dialogue:
+    sentences:
+    - "\uC815\uBCF4: \uBB34\uC791\uC704 \uD3EC\uCF13\uBAAC\uC744 \uD68D\uB4DD\uD569\uB2C8\uB2E4."
+    dialogueEndEvent:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1368119910}
+          m_TargetAssemblyTypeName: PokemonCenterManager, Assembly-CSharp
+          m_MethodName: GetRandomPokemon
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &1301293832
 GameObject:
   m_ObjectHideFlags: 0
@@ -56232,7 +56368,6 @@ MonoBehaviour:
     currentHp: 0
     power: 5
     type: 0
-    skills: []
     portrait: {fileID: 0}
   isSelected: 0
 --- !u!1 &1501301289
@@ -57948,6 +58083,7 @@ Transform:
   - {fileID: 1559201178}
   - {fileID: 70183917}
   - {fileID: 1368119911}
+  - {fileID: 2123262896}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1707070689
@@ -63025,6 +63161,72 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
+--- !u!1 &2123262895
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2123262896}
+  - component: {fileID: 2123262897}
+  m_Layer: 0
+  m_Name: Pokemon Manager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2123262896
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2123262895}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1705253126}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2123262897
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2123262895}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0a9f79865370d9c4ebbf302c6406e41b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pokemonDatas:
+  - {fileID: 11400000, guid: b28ffebb95258f242ab94262cb01761d, type: 2}
+  - {fileID: 11400000, guid: acf9ec9a7bb68ac41ab1a840a6438e9d, type: 2}
+  - {fileID: 11400000, guid: a7145d33fb88d0c4cb88d7bd0ba2912a, type: 2}
+  - {fileID: 11400000, guid: 962975c0ce7b6604db16395e216682be, type: 2}
+  - {fileID: 11400000, guid: 6c37a95d321e8f04d9293adfd4bf7f1c, type: 2}
+  - {fileID: 11400000, guid: e4d4bcabe7ffa5e4e833db02bac1575b, type: 2}
+  - {fileID: 11400000, guid: 8a59c91ca90312e4bab29daf000a2d28, type: 2}
+  - {fileID: 11400000, guid: daac7efa5db1f6b41a6865c63b63aaef, type: 2}
+  - {fileID: 11400000, guid: d7214c3ce830f2940b3369177f756bd1, type: 2}
+  - {fileID: 11400000, guid: 879877a80a9d893498c6b4b818690cae, type: 2}
+  - {fileID: 11400000, guid: 29922093aba5e19478bf743cc3195f2a, type: 2}
+  - {fileID: 11400000, guid: f38909f1e13afca4cba8ed1ddc11a411, type: 2}
+  - {fileID: 11400000, guid: 0d4c0202947ade6449a8b1de4f5e12b0, type: 2}
+  - {fileID: 11400000, guid: 89dab6423bd0fe346857fc97b0787920, type: 2}
+  - {fileID: 11400000, guid: 3a7bddd6c4b97a44ba9f8c173713b29f, type: 2}
+  - {fileID: 11400000, guid: 824744db2ea026b4799a5ac02be2239b, type: 2}
+  - {fileID: 11400000, guid: d401b1e3f4e04b641ae64ead946b8ef5, type: 2}
+  - {fileID: 11400000, guid: a34ae10e523a2a34eb7f6279d9481917, type: 2}
+  - {fileID: 11400000, guid: c89086756b6c0004c816d47f85f408a6, type: 2}
+  - {fileID: 11400000, guid: 9606475de5cab6542aadb6807534b96c, type: 2}
+  pokemons: []
 --- !u!1 &2142124647
 GameObject:
   m_ObjectHideFlags: 0

@@ -37,8 +37,14 @@ public class PokemonCenterManager : MonoBehaviour
         }
         else
         {
-            Pokemon pokemon = new Pokemon();
+            Pokemon newPokemon = PokemonManager.Instance.GetRandomPokemon();
+            playerTrainer.ownPokemons.Add(newPokemon);
+            DialogueManager.Instance.ShowForceDialogue($"¿Ï·á: Lv.{newPokemon.level} {newPokemon.name}À»(¸¦) È¹µæÇß½À´Ï´Ù!");
         }
+
+        yield return new WaitUntil(() => Input.GetKeyDown(KeyCode.E));
+
+        DialogueManager.Instance.HideForceDialogue();
     }
 
     public void HealPlayerOwnAllPokemons()
