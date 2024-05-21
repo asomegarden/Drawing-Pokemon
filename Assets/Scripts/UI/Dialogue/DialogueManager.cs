@@ -15,6 +15,8 @@ public class DialogueManager : MonoBehaviour
     private Queue<string> sentences;
     private UnityEvent currentDialogueEndEvent;
 
+    private bool isDialogueShowing = false;
+
     private void Awake()
     {
         if (Instance == null) Instance = this;
@@ -27,6 +29,7 @@ public class DialogueManager : MonoBehaviour
 
     public void StartDialogue(Dialogue dialogue)
     {
+        isDialogueShowing = true;
         dialoguePanel.SetActive(true);
         sentences.Clear();
 
@@ -45,7 +48,7 @@ public class DialogueManager : MonoBehaviour
     private IEnumerator InputCoroutine()
     {
         yield return new WaitForFixedUpdate();
-        while (dialoguePanel.activeSelf)
+        while (isDialogueShowing)
         {
             if (Input.GetKeyDown(nextSentenceKey))
             {
@@ -70,6 +73,7 @@ public class DialogueManager : MonoBehaviour
 
     public void ShowForceDialogue(string sentence)
     {
+        
         PlayerController.Instance.DisableInput();
         dialoguePanel.SetActive(true);
         dialogueText.text = sentence;
@@ -83,8 +87,11 @@ public class DialogueManager : MonoBehaviour
 
     void EndDialogue()
     {
+        isDialogueShowing = false;
         dialoguePanel.SetActive(false);
         PlayerController.Instance.EnableInput();
         currentDialogueEndEvent?.Invoke();
     }
+
+
 }
