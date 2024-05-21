@@ -33,6 +33,8 @@ public class BattleManager : MonoBehaviour
     public GameObject actionSelectPanel;
     public GameObject[] actionSelectCursors;
 
+    public PokemonSelectPanel pokemonSelectPanel;
+
     public bool isBattleLoop;
 
     private void Awake()
@@ -42,12 +44,33 @@ public class BattleManager : MonoBehaviour
 
     public void StartBattle(PokemonTrainer enemy)
     {
-        PlayerController.Instance.DisableInput();
+        if(player.AutoSentOutPokemon() == null)
+        {
+            Dialogue dialogue = new Dialogue();
+            dialogue.sentences = new List<string>()
+            {
+                "뭐야, 싸울 수 있는 포켓몬부터 들고와!"
+            };
+            DialogueManager.Instance.StartDialogue(dialogue);
+            
+        }else if (enemy.AutoSentOutPokemon() == null)
+        {
+            Dialogue dialogue = new Dialogue();
+            dialogue.sentences = new List<string>()
+            {
+                "앗 미안 지금은 싸울 수 있는 포켓몬이 없어"
+            };
+            DialogueManager.Instance.StartDialogue(dialogue);
+        }
+        else
+        {
+            PlayerController.Instance.DisableInput();
 
-        this.enemy = enemy;
-        battleScreenPanel.SetActive(true);
+            this.enemy = enemy;
+            battleScreenPanel.SetActive(true);
 
-        StartCoroutine(BattleLoop());
+            StartCoroutine(BattleLoop());
+        }
     }
 
     public IEnumerator BattleLoop()
@@ -69,6 +92,7 @@ public class BattleManager : MonoBehaviour
         enemyPokemonMonitor.gameObject.SetActive(false);
         playerPokemonMonitor.gameObject.SetActive(false);
 
+        pokemonSelectPanel.gameObject.SetActive(false);
         actionSelectPanel.SetActive(false);
 
         //Setup
@@ -100,7 +124,16 @@ public class BattleManager : MonoBehaviour
 
                     yield return new WaitForSeconds(1f);
 
-                    yield return StartCoroutine(EnemySentOut(enemy.AutoSentOutPokemon()));
+                    enemyPokemon = enemy.AutoSentOutPokemon();
+
+                    if (enemyPokemon == null)
+                    {
+                        yield return StartCoroutine(DefeatEnemy());
+                    }
+                    else
+                    {
+                        yield return StartCoroutine(EnemySentOut(enemy.AutoSentOutPokemon()));
+                    }
                 }
                 else
                 {
@@ -122,12 +155,22 @@ public class BattleManager : MonoBehaviour
             }
             else if(selectedActionIndex == 2)
             {
+                pokemonSelectPanel.gameObject.SetActive(true);
+                dialogueText.text = "";
+                actionSelectPanel.gameObject.SetActive(false);
 
+                do
+                {
+                    pokemonSelectPanel.Set(player);
+                    yield return new WaitUntil(() => pokemonSelectPanel.isSelected == true);
+
+                } while (pokemonSelectPanel.selectedPokemon.currentHp <= 0);
+
+                pokemonSelectPanel.gameObject.SetActive(false);
+
+                yield return PlayerSentOut(pokemonSelectPanel.selectedPokemon);
             }
         }
-        
-        battleScreenPanel.SetActive(false);
-        PlayerController.Instance.EnableInput();
     }
 
     public IEnumerator SetupBattle()
@@ -268,5 +311,21 @@ public class BattleManager : MonoBehaviour
         yield return new WaitForSeconds(0.5f);
 
         dialogueText.text = "";
+    }
+
+    private void EndBattle()
+    {
+        battleScreenPanel.SetActive(false);
+        PlayerController.Instance.EnableInput();
+    }
+
+    private IEnumerator DefeatEnemy()
+    {
+        enemyPortraitImage.gameObject.SetActive(true);
+        dialogueText.text = "말도 안돼! 내가 지다니!";
+
+        yield return new WaitUntil(() => Input.GetKeyDown(KeyCode.E) == true);
+
+        EndBattle();
     }
 }
