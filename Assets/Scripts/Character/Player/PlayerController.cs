@@ -14,6 +14,8 @@ public class PlayerController : HumanController
     public TextMeshProUGUI inputIndicateText;
     private bool inputEnabled = true;
 
+    public PokemonTrainer trainer;
+
     private void Awake()
     {
         if (Instance == null) Instance = this;
@@ -40,6 +42,8 @@ public class PlayerController : HumanController
             if (Input.GetKeyDown(currentInteractable.triggerKey))
             {
                 currentInteractable.TriggerInteraction();
+                currentInteractable = null;
+                RefreshIndicateText();
             }
         }
 
@@ -78,10 +82,19 @@ public class PlayerController : HumanController
         if (collider != null)
         {
             currentInteractable = collider.GetComponent<InteractObject>();
-            if (currentInteractable != null)
-            {
-                inputIndicateText.text = $"{currentInteractable.interactionName}[{currentInteractable.triggerKey}]";
-            }
+            
+        }
+    }
+
+    public void RefreshIndicateText()
+    {
+        if (currentInteractable != null)
+        {
+            inputIndicateText.text = $"{currentInteractable.interactionName}[{currentInteractable.triggerKey}]";
+        }
+        else
+        {
+            inputIndicateText.text = "";
         }
     }
 
