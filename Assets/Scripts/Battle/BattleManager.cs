@@ -232,6 +232,9 @@ public class BattleManager : MonoBehaviour
     {
         playerPokemon = pokemon;
         playerPortraitImage.gameObject.SetActive(false);
+        playerPokemonPortraitImage.gameObject.SetActive(false);
+        playerPokemonMonitor.gameObject.SetActive(false);
+        playerPokeballMonitor.gameObject.SetActive(false);
 
         yield return new WaitForSeconds(1f);
 
