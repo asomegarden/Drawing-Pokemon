@@ -68,7 +68,7 @@ public class PlayerController : HumanController
         {
             hasInteract = false;
             currentInteractable = null;
-            inputIndicateText.text = $"";
+            inputIndicateText.text = "";
             lookDirection = moveDirection;
             MoveCommand(moveDirection);
         }
