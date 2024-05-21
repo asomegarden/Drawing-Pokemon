@@ -278,6 +278,7 @@ MonoBehaviour:
   animator: {fileID: 24209059}
   moveSpeed: 8
   inputIndicateText: {fileID: 359083239}
+  trainer: {fileID: 24209061}
 --- !u!114 &24209061
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -50687,11 +50688,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dialogue:
     sentences:
-    - "\uD14C\uC2A4\uD2B8\uC6A9 \uB300\uD654\uC785\uB2C8\uB2E4."
-    - "\uB2E4\uC74C \uD0A4\uB97C \uACC4\uC18D \uB20C\uB7EC \uB300\uD654\uB97C \uC885\uB8CC\uD558\uC138\uC694!"
+    - "\uC548\uB155\uD558\uC138\uC694. \uD3EC\uCF13\uBAAC \uCE58\uC720\uC18C\uC785\uB2C8\uB2E4."
     dialogueEndEvent:
       m_PersistentCalls:
-        m_Calls: []
+        m_Calls:
+        - m_Target: {fileID: 1368119910}
+          m_TargetAssemblyTypeName: PokemonCenterManager, Assembly-CSharp
+          m_MethodName: HealPlayerOwnAllPokemons
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!114 &1301293837
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -51190,6 +51202,50 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1364892566}
   m_CullTransparentMesh: 1
+--- !u!1 &1368119909
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1368119911}
+  - component: {fileID: 1368119910}
+  m_Layer: 0
+  m_Name: Pokemon Center Manager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1368119910
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1368119909}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 022b4106cb2487847b08348fd26c2358, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &1368119911
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1368119909}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1705253126}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1380792469
 GameObject:
   m_ObjectHideFlags: 0
@@ -52942,6 +52998,7 @@ Transform:
   m_Children:
   - {fileID: 1559201178}
   - {fileID: 70183917}
+  - {fileID: 1368119911}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1707070689
