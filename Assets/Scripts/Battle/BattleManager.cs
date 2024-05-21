@@ -103,87 +103,69 @@ public class BattleManager : MonoBehaviour
 
         while (isBattleLoop)
         {
-            yield return StartCoroutine(ActionSelect());
-
-            if(selectedActionIndex == 0)
-            {
-                yield return StartCoroutine(Attack(playerPokemon, enemyPokemon, enemyPokemonMonitor));
-
-                if(enemyPokemon.currentHp <= 0)
-                {
-                    dialogueText.text = $"{enemyPokemon.name}(이)가 쓰러졌다!";
-                    yield return new WaitForSeconds(0.5f);
-                    enemyPokemonPortraitImage.gameObject.SetActive(false);
-                    enemyPokemonMonitor.gameObject.SetActive(false);
-
-                    yield return new WaitForSeconds(0.5f);
-
-                    enemyPortraitImage.gameObject.SetActive(true);
-                    enemyPokeballMonitor.gameObject.SetActive(true);
-                    enemyPokeballMonitor.Set(enemy.ownPokemons);
-
-                    yield return new WaitForSeconds(1f);
-
-                    enemyPokemon = enemy.AutoSentOutPokemon();
-
-                    if (enemyPokemon == null)
-                    {
-                        StartCoroutine(DefeatEnemy());
-                    }
-                    else
-                    {
-                        yield return StartCoroutine(EnemySentOut(enemy.AutoSentOutPokemon()));
-                    }
-                }
-                else
-                {
-                    yield return new WaitForSeconds(1f);
-
-                    yield return StartCoroutine(Attack(enemyPokemon, playerPokemon, playerPokemonMonitor));
-
-                    if(playerPokemon.currentHp <= 0)
-                    {
-                        dialogueText.text = $"{playerPokemon.name}(이)가 쓰러졌다!";
-                        playerPokemonPortraitImage.gameObject.SetActive(false);
-                        playerPokemonMonitor.gameObject.SetActive(false);
-
-                        yield return new WaitForSeconds(0.5f);
-
-                        playerPortraitImage.gameObject.SetActive(true);
-                        playerPokeballMonitor.gameObject.SetActive(true);
-                        playerPokeballMonitor.Set(player.ownPokemons);
-
-                        if (player.ownPokemons.Find(p => p.currentHp > 0) == null)
-                        {
-                            StartCoroutine(DefeatPlayer());
-                        }
-                    }
-                }
-            }
-            else if(selectedActionIndex == 1)
-            {
-                StartCoroutine(Runaway());
-            }
-            else if(selectedActionIndex == 2)
-            {
-                pokemonSelectPanel.gameObject.SetActive(true);
-                dialogueText.text = "";
-                actionSelectPanel.gameObject.SetActive(false);
-
-                do
-                {
-                    pokemonSelectPanel.Set(player);
-                    yield return new WaitUntil(() => pokemonSelectPanel.isSelected == true);
-
-                } while (pokemonSelectPanel.selectedPokemon.currentHp <= 0);
-
-                pokemonSelectPanel.gameObject.SetActive(false);
-
-                yield return PlayerSentOut(pokemonSelectPanel.selectedPokemon);
-            }
+            yield return StartCoroutine(PlayerAction());
+            yield return StartCoroutine(EnemyAction());
         }
 
         EndBattle();
+    }
+
+    private IEnumerator EnemyAction()
+    {
+        if (enemyPokemon.currentHp <= 0)
+        {
+            dialogueText.text = $"{enemyPokemon.name}(이)가 쓰러졌다!";
+            yield return new WaitForSeconds(0.5f);
+            enemyPokemonPortraitImage.gameObject.SetActive(false);
+            enemyPokemonMonitor.gameObject.SetActive(false);
+
+            yield return new WaitForSeconds(0.5f);
+
+            enemyPortraitImage.gameObject.SetActive(true);
+            enemyPokeballMonitor.gameObject.SetActive(true);
+            enemyPokeballMonitor.Set(enemy.ownPokemons);
+
+            yield return new WaitForSeconds(1f);
+
+            enemyPokemon = enemy.AutoSentOutPokemon();
+
+            if (enemyPokemon == null)
+            {
+                yield return StartCoroutine(DefeatEnemy());
+            }
+            else
+            {
+                yield return StartCoroutine(EnemySentOut(enemy.AutoSentOutPokemon()));
+            }
+        }
+        else
+        {
+            yield return new WaitForSeconds(1f);
+
+            yield return StartCoroutine(Attack(enemyPokemon, playerPokemon, playerPokemonMonitor));
+
+            if (playerPokemon.currentHp <= 0)
+            {
+                dialogueText.text = $"{playerPokemon.name}(이)가 쓰러졌다!";
+                playerPokemonPortraitImage.gameObject.SetActive(false);
+                playerPokemonMonitor.gameObject.SetActive(false);
+
+                yield return new WaitForSeconds(0.5f);
+
+                playerPortraitImage.gameObject.SetActive(true);
+                playerPokeballMonitor.gameObject.SetActive(true);
+                playerPokeballMonitor.Set(player.ownPokemons);
+
+                if (player.ownPokemons.Find(p => p.currentHp > 0) == null)
+                {
+                    yield return StartCoroutine(DefeatPlayer());
+                }
+                else
+                {
+                    yield return StartCoroutine(SelectPokemon());
+                }
+            }
+        }
     }
 
     public IEnumerator SetupBattle()
@@ -310,6 +292,24 @@ public class BattleManager : MonoBehaviour
         actionSelectPanel.SetActive(false);
     }
 
+    private IEnumerator PlayerAction()
+    {
+        yield return StartCoroutine(ActionSelect());
+
+        if (selectedActionIndex == 0)
+        {
+            yield return StartCoroutine(Attack(playerPokemon, enemyPokemon, enemyPokemonMonitor));
+        }
+        else if (selectedActionIndex == 1)
+        {
+            yield return StartCoroutine(Runaway());
+        }
+        else if (selectedActionIndex == 2)
+        {
+            yield return StartCoroutine(SelectPokemon());
+        }
+    }
+
     private IEnumerator Attack(Pokemon attacker, Pokemon target, PokemonMonitor targetMonitor)
     {
         dialogueText.text = $"{attacker.name}가 공격했다!";
@@ -329,6 +329,24 @@ public class BattleManager : MonoBehaviour
         dialogueText.text = "";
     }
 
+    private IEnumerator SelectPokemon()
+    {
+        pokemonSelectPanel.gameObject.SetActive(true);
+        dialogueText.text = "";
+        actionSelectPanel.gameObject.SetActive(false);
+
+        do
+        {
+            pokemonSelectPanel.Set(player);
+            yield return new WaitUntil(() => pokemonSelectPanel.isSelected == true);
+
+        } while (pokemonSelectPanel.selectedPokemon.currentHp <= 0);
+
+        pokemonSelectPanel.gameObject.SetActive(false);
+
+        yield return PlayerSentOut(pokemonSelectPanel.selectedPokemon);
+    }
+
     private void EndBattle()
     {
         battleScreenPanel.SetActive(false);
@@ -346,7 +364,7 @@ public class BattleManager : MonoBehaviour
 
     private IEnumerator DefeatPlayer()
     {
-        dialogueText.text = $"{enemy.name}에게서 도망쳤다.";
+        dialogueText.text = $"{enemy.name}에게 지고말았다..";
 
         yield return new WaitUntil(() => Input.GetKeyDown(KeyCode.E) == true);
 
@@ -355,8 +373,8 @@ public class BattleManager : MonoBehaviour
 
     private IEnumerator Runaway()
     {
-        dialogueText.text = $"{enemy.name}에게 지고말았다..";
-
+        dialogueText.text = $"{enemy.name}에게서 도망쳤다.";
+        
         yield return new WaitUntil(() => Input.GetKeyDown(KeyCode.E) == true);
 
         isBattleLoop = false;
