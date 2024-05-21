@@ -48,13 +48,13 @@ public class PokemonSelectPanel : MonoBehaviour
         while (!Input.GetKeyDown(KeyCode.E))
         {
             float input = Input.GetAxisRaw("Vertical");
-            if (input < 0)
+            if (input > 0)
             {
                 if (--selectedIndex < 0) selectedIndex = pokemons.Count - 1;
                 UpdateCursor();
                 yield return new WaitForSeconds(0.5f);
             }
-            else if (input > 0)
+            else if (input < 0)
             {
                 if (++selectedIndex == pokemons.Count) selectedIndex = 0;
                 UpdateCursor();

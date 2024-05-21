@@ -371,15 +371,15 @@ MonoBehaviour:
   ownPokemons:
   - name: "\uAF2C\uBD80\uAE30"
     level: 1
-    maxHp: 5
-    currentHp: 5
+    maxHp: 15
+    currentHp: 15
     power: 5
     type: 1
     portrait: {fileID: 1669708502, guid: 47cff00413ec78e4ca7fd26ce1ba54f8, type: 3}
   - name: "\uD30C\uC774\uB9AC"
     level: 1
-    maxHp: 5
-    currentHp: 5
+    maxHp: 10
+    currentHp: 10
     power: 5
     type: 0
     portrait: {fileID: 1669708502, guid: 47cff00413ec78e4ca7fd26ce1ba54f8, type: 3}
@@ -6841,8 +6841,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\uC548\uB155 \uC9C0\uAE08\uC740 \uB300\uD654 \uB0B4\uC6A9\uC744 \u314D\uD45C\uC2DC\uD560\uAC70\uC57C.
-    \uBB34\uC2A8 \uC77C\uC774\uC57C ?"
+  m_text: "\uB2E4\uC774\uC5BC\uB85C\uADF8 \uD14D\uC2A4\uD2B8"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: f59e6d418220f5449bd7ff1925fa7d49, type: 2}
   m_sharedMaterial: {fileID: 5052221672474920990, guid: f59e6d418220f5449bd7ff1925fa7d49, type: 2}
@@ -7257,7 +7256,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dialogue:
     sentences:
-    - "\uC804\uD22C \uC2E0\uCCAD"
+    - "\uC7A0\uAE50! \uB098\uB791 \uACA8\uB904\uBCF4\uC790!"
     dialogueEndEvent:
       m_PersistentCalls:
         m_Calls:
