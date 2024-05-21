@@ -43,7 +43,7 @@ public class PlayerController : HumanController
             {
                 currentInteractable.TriggerInteraction();
                 currentInteractable = null;
-                RefreshIndicateText();
+                inputIndicateText.text = "";
             }
         }
 
@@ -82,19 +82,7 @@ public class PlayerController : HumanController
         if (collider != null)
         {
             currentInteractable = collider.GetComponent<InteractObject>();
-            
-        }
-    }
-
-    public void RefreshIndicateText()
-    {
-        if (currentInteractable != null)
-        {
             inputIndicateText.text = $"{currentInteractable.interactionName}[{currentInteractable.triggerKey}]";
-        }
-        else
-        {
-            inputIndicateText.text = "";
         }
     }
 
