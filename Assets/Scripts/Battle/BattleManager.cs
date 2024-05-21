@@ -128,7 +128,8 @@ public class BattleManager : MonoBehaviour
 
                     if (enemyPokemon == null)
                     {
-                        yield return StartCoroutine(DefeatEnemy());
+                        isBattleLoop = false;
+                        StartCoroutine(DefeatEnemy());
                     }
                     else
                     {
@@ -144,8 +145,20 @@ public class BattleManager : MonoBehaviour
                     if(playerPokemon.currentHp <= 0)
                     {
                         dialogueText.text = $"{playerPokemon.name}(이)가 쓰러졌다!";
+                        playerPokemonPortraitImage.gameObject.SetActive(false);
+                        playerPokemonMonitor.gameObject.SetActive(false);
+
                         yield return new WaitForSeconds(0.5f);
-                        isBattleLoop = false;
+
+                        playerPortraitImage.gameObject.SetActive(true);
+                        playerPokeballMonitor.gameObject.SetActive(true);
+                        playerPokeballMonitor.Set(player.ownPokemons);
+
+                        if (player.ownPokemons.Find(p => p.currentHp > 0) == null)
+                        {
+                            isBattleLoop = false;
+                            StartCoroutine(DefeatPlayer());
+                        }
                     }
                 }
             }
@@ -324,8 +337,16 @@ public class BattleManager : MonoBehaviour
 
     private IEnumerator DefeatEnemy()
     {
-        enemyPortraitImage.gameObject.SetActive(true);
         dialogueText.text = "말도 안돼! 내가 지다니!";
+
+        yield return new WaitUntil(() => Input.GetKeyDown(KeyCode.E) == true);
+
+        EndBattle();
+    }
+
+    private IEnumerator DefeatPlayer()
+    {
+        dialogueText.text = $"{enemy.name}에게 지고말았다..";
 
         yield return new WaitUntil(() => Input.GetKeyDown(KeyCode.E) == true);
 
