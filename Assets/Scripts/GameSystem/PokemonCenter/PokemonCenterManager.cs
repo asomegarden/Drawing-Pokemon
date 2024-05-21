@@ -1,26 +1,77 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class PokemonCenterManager : MonoBehaviour
 {
     public static PokemonCenterManager Instance {  get; private set; }
 
-    private PokemonTrainer playerTrainer;
+    public PokemonTrainer playerTrainer;
+    public GameObject pokemonRemoveScreen;
+    public PokemonSelectPanel pokemonSelectPanel;
 
     private void Awake()
     {
         if(Instance == null)Instance = this;
     }
 
-    private void Start()
+    public void GetRandomPokemon()
     {
-        playerTrainer = PlayerController.Instance.trainer;
+        StartCoroutine(GetRandomPokemonCoroutine());
+    }
+
+    private IEnumerator GetRandomPokemonCoroutine()
+    {
+        string sentence = "";
+        for (int i = 3; i > 0; i--)
+        {
+            sentence += $"{i}..";
+            DialogueManager.Instance.ShowForceDialogue(sentence);
+            yield return new WaitForSeconds(1f);
+        }
+
+        if(playerTrainer.ownPokemons.Count == 6)
+        {
+            DialogueManager.Instance.ShowForceDialogue("오류: 보유한 포켓몬이 너무 많습니다.");
+        }
+        else
+        {
+            Pokemon pokemon = new Pokemon();
+        }
     }
 
     public void HealPlayerOwnAllPokemons()
     {
         StartCoroutine(HealPlayerOwnAllPokemonsCoroutine());
+    }
+
+    public void StartPokemonRemove()
+    {
+        StartCoroutine(PokemonRemoveCoroutine());
+    }
+
+    private IEnumerator PokemonRemoveCoroutine()
+    {
+        PlayerController.Instance.DisableInput();
+
+        pokemonRemoveScreen.SetActive(true);
+        pokemonSelectPanel.Set(playerTrainer);
+
+        while(!Input.GetKeyDown(KeyCode.Escape))
+        {
+            if (pokemonSelectPanel.isSelected)
+            {
+                if (pokemonSelectPanel.selectedPokemon == null) break;
+                playerTrainer.ownPokemons.Remove(pokemonSelectPanel.selectedPokemon);
+                pokemonSelectPanel.Set(playerTrainer);
+            }
+            yield return null;
+        }
+
+        pokemonRemoveScreen.SetActive(false);
+
+        PlayerController.Instance.EnableInput();
     }
 
     private IEnumerator HealPlayerOwnAllPokemonsCoroutine()

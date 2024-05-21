@@ -16,6 +16,13 @@ public class PokemonSelectPanel : MonoBehaviour
     public void Set(PokemonTrainer trainer)
     {
         pokemons = trainer.ownPokemons;
+
+        if(pokemons.Count == 0)
+        {
+            isSelected = true;
+            selectedPokemon = null;
+            return;
+        }
         isSelected = false;
         selectedIndex = 0;
 
