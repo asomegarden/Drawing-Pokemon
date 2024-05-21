@@ -128,7 +128,6 @@ public class BattleManager : MonoBehaviour
 
                     if (enemyPokemon == null)
                     {
-                        isBattleLoop = false;
                         StartCoroutine(DefeatEnemy());
                     }
                     else
@@ -156,7 +155,6 @@ public class BattleManager : MonoBehaviour
 
                         if (player.ownPokemons.Find(p => p.currentHp > 0) == null)
                         {
-                            isBattleLoop = false;
                             StartCoroutine(DefeatPlayer());
                         }
                     }
@@ -164,7 +162,7 @@ public class BattleManager : MonoBehaviour
             }
             else if(selectedActionIndex == 1)
             {
-                isBattleLoop = false;
+                StartCoroutine(Runaway());
             }
             else if(selectedActionIndex == 2)
             {
@@ -184,6 +182,8 @@ public class BattleManager : MonoBehaviour
                 yield return PlayerSentOut(pokemonSelectPanel.selectedPokemon);
             }
         }
+
+        EndBattle();
     }
 
     public IEnumerator SetupBattle()
@@ -341,15 +341,24 @@ public class BattleManager : MonoBehaviour
 
         yield return new WaitUntil(() => Input.GetKeyDown(KeyCode.E) == true);
 
-        EndBattle();
+        isBattleLoop = false;
     }
 
     private IEnumerator DefeatPlayer()
+    {
+        dialogueText.text = $"{enemy.name}에게서 도망쳤다.";
+
+        yield return new WaitUntil(() => Input.GetKeyDown(KeyCode.E) == true);
+
+        isBattleLoop = false;
+    }
+
+    private IEnumerator Runaway()
     {
         dialogueText.text = $"{enemy.name}에게 지고말았다..";
 
         yield return new WaitUntil(() => Input.GetKeyDown(KeyCode.E) == true);
 
-        EndBattle();
+        isBattleLoop = false;
     }
 }
