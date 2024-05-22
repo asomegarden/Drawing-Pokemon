@@ -9,6 +9,7 @@
 
 ### Character
 - [Character Sprites](https://www.spriters-resource.com/fullview/9077/)
+- [Character Portraits](https://www.spriters-resource.com/fullview/9100/)
 
 ### Pokemon
 - [Pokemon Sprites](https://www.spriters-resource.com/game_boy_gbc/pokemongoldsilver/sheet/52692/)
