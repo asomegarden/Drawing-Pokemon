@@ -207,7 +207,7 @@ public class BattleManager : MonoBehaviour
         enemyPokeballMonitor.gameObject.SetActive(false);
 
         enemyPokemon = pokemon;
-        dialogueText.text = $"{enemy.name}는 {pokemon.name}을 내보냈다!";
+        dialogueText.text = $"{enemy.name}은(는) {pokemon.name}을(를) 내보냈다!";
 
         yield return new WaitForSeconds(1f);
 
@@ -316,19 +316,32 @@ public class BattleManager : MonoBehaviour
 
     private IEnumerator Attack(Pokemon attacker, Pokemon target, PokemonMonitor targetMonitor)
     {
-        dialogueText.text = $"{attacker.name}가 공격했다!";
+        dialogueText.text = $"{attacker.name}이(가) 공격했다!";
 
         yield return new WaitForSeconds(0.5f);
         int damage = attacker.power;
+        float coef = attacker.GetDamageCoefficient(target.type);
 
+        damage = (int)(damage * coef);
         target.CurrentHp -= damage;
         targetMonitor.Set(target);
 
         yield return new WaitForSeconds(0.5f);
 
-        dialogueText.text = $"{target.name}가 {damage} 피해를 입었다!";
+        dialogueText.text = $"{target.name}이(가) {damage} 피해를 입었다!";
 
         yield return new WaitForSeconds(0.5f);
+
+        if (coef > 1.1f)
+        {
+            dialogueText.text = "효과는 굉장했다!";
+            yield return new WaitForSeconds(0.5f);
+        }
+        else if(coef < 0.9f)
+        {
+            dialogueText.text = "효과는 미미했다..";
+            yield return new WaitForSeconds(0.5f);
+        }
 
         dialogueText.text = "";
     }
