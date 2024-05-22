@@ -88,7 +88,7 @@ public class PokemonCenterManager : MonoBehaviour
         InputIndicator.Instance.HideAllIndicator();
         playerTrainer.ownPokemons.ForEach(p =>
         {
-            p.currentHp = p.maxHp;
+            p.CurrentHp = p.maxHp;
         });
 
         string sentence = "";

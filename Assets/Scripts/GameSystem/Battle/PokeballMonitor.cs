@@ -21,7 +21,7 @@ public class PokeballMonitor : MonoBehaviour
             }
             else
             {
-                if (pokemons[i].currentHp > 0)
+                if (pokemons[i].CurrentHp > 0)
                 {
                     pokeballImages[i].sprite = aliveBallSprite;
                 }

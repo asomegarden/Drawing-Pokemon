@@ -113,7 +113,7 @@ public class BattleManager : MonoBehaviour
 
     private IEnumerator EnemyAction()
     {
-        if (enemyPokemon.currentHp <= 0)
+        if (enemyPokemon.CurrentHp <= 0)
         {
             dialogueText.text = $"{enemyPokemon.name}(이)가 쓰러졌다!";
             yield return new WaitForSeconds(0.5f);
@@ -145,7 +145,7 @@ public class BattleManager : MonoBehaviour
 
             yield return StartCoroutine(Attack(enemyPokemon, playerPokemon, playerPokemonMonitor));
 
-            if (playerPokemon.currentHp <= 0)
+            if (playerPokemon.CurrentHp <= 0)
             {
                 dialogueText.text = $"{playerPokemon.name}(이)가 쓰러졌다!";
                 playerPokemonPortraitImage.gameObject.SetActive(false);
@@ -157,7 +157,7 @@ public class BattleManager : MonoBehaviour
                 playerPokeballMonitor.gameObject.SetActive(true);
                 playerPokeballMonitor.Set(player.ownPokemons);
 
-                if (player.ownPokemons.Find(p => p.currentHp > 0) == null)
+                if (player.ownPokemons.Find(p => p.CurrentHp > 0) == null)
                 {
                     yield return StartCoroutine(DefeatPlayer());
                 }
@@ -321,7 +321,7 @@ public class BattleManager : MonoBehaviour
         yield return new WaitForSeconds(0.5f);
         int damage = attacker.power;
 
-        target.currentHp -= damage;
+        target.CurrentHp -= damage;
         targetMonitor.Set(target);
 
         yield return new WaitForSeconds(0.5f);
@@ -346,7 +346,7 @@ public class BattleManager : MonoBehaviour
             pokemonSelectPanel.Set(player);
             yield return new WaitUntil(() => pokemonSelectPanel.isSelected == true);
 
-        } while (pokemonSelectPanel.selectedPokemon.currentHp <= 0);
+        } while (pokemonSelectPanel.selectedPokemon.CurrentHp <= 0);
 
         pokemonSelectPanel.gameObject.SetActive(false);
 

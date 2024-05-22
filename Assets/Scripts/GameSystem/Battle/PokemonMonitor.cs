@@ -18,9 +18,9 @@ public class PokemonMonitor : MonoBehaviour
         nameText.text = pokemon.name;
         levelText.text = $":L{pokemon.level}";
         hpSlider.maxValue = pokemon.maxHp;
-        hpSlider.value = pokemon.currentHp;
+        hpSlider.value = pokemon.CurrentHp;
 
-        if (currentHpText != null) currentHpText.text = pokemon.currentHp.ToString();
+        if (currentHpText != null) currentHpText.text = pokemon.CurrentHp.ToString();
         if (maxHpText != null) maxHpText.text = pokemon.maxHp.ToString();
     }
 }

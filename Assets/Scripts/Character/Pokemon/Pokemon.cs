@@ -9,7 +9,11 @@ public class Pokemon
     public string name;
     public int level;
     public int maxHp;
-    public int currentHp;
+    private int currentHp;
+    public int CurrentHp { 
+        get { return currentHp; } 
+        set { currentHp = value; if (currentHp < 0) currentHp = 0; } 
+    }
     public int power = 5;
     public Type type;
     public Sprite frontPortrait;
@@ -35,7 +39,7 @@ public class Pokemon
         this.behindPortrait = pokemon.behindPortrait;
         this.level = pokemon.level;
         this.maxHp = pokemon.maxHp;
-        this.currentHp = pokemon.currentHp;
+        this.currentHp = pokemon.CurrentHp;
         this.power = pokemon.power;
     }
 
