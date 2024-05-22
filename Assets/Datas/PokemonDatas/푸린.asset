@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5d5f5c9801671a24ba0f43ad0b6a1327, type: 3}
+  m_Name: "\uD478\uB9B0"
+  m_EditorClassIdentifier: 
+  pokemonName: "\uD478\uB9B0"
+  type: 3
+  frontPortrait: {fileID: 131387098, guid: d1ad9d4cb4e752c478f8ba937abf0f14, type: 3}
+  behindPortrait: {fileID: -1010145898, guid: d1ad9d4cb4e752c478f8ba937abf0f14, type: 3}

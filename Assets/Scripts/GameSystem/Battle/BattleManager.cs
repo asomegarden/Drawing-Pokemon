@@ -171,7 +171,7 @@ public class BattleManager : MonoBehaviour
 
     public IEnumerator SetupBattle()
     {
-        dialogueText.text = $"포켓몬 트레이너 {enemy.name}(이)가 승부를 걸어왔다!";
+        dialogueText.text = $"{enemy.name}(이)가 승부를 걸어왔다!";
 
         yield return new WaitForSeconds(1f);
 
