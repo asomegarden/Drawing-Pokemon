@@ -45,7 +45,7 @@ public class MenuPanel : MonoBehaviour
             UIManager.Instance.ShowPokemonPanel();
         }else if(selectedIndex == 1)
         {
-            //GameManager.Instance.ExitGame();
+            GameManager.Instance.ExitGame();
         }
 
         isSelected = true;
