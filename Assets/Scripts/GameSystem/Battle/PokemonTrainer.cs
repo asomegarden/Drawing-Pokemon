@@ -31,7 +31,7 @@ public class PokemonTrainer : MonoBehaviour
         Pokemon pokemon = null;
         for(int i=0; i<ownPokemons.Count; i++)
         {
-            if (ownPokemons[i].currentHp > 0)
+            if (ownPokemons[i].CurrentHp > 0)
             {
                 pokemon = ownPokemons[i];
                 break;

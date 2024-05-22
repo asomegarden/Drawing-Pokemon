@@ -17,8 +17,8 @@ public class PokemonItem : MonoBehaviour
         nameText.text = pokemon.name;
         levelText.text = $":L{pokemon.level}";
         typeText.text = pokemon.type.ToString();
-        hpText.text = $"{pokemon.currentHp}/{pokemon.maxHp}";
+        hpText.text = $"{pokemon.CurrentHp}/{pokemon.maxHp}";
         hpBar.maxValue = pokemon.maxHp;
-        hpBar.value = pokemon.currentHp;
+        hpBar.value = pokemon.CurrentHp;
     }
 }

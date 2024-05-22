@@ -59,7 +59,7 @@ public class PokemonManager : MonoBehaviour
         newPokemon.level = level;
         newPokemon.maxHp = newPokemon.level * 10 + Random.Range(-20, 21);
         if (newPokemon.maxHp < 5) newPokemon.maxHp = 5;
-        newPokemon.currentHp = newPokemon.maxHp;
+        newPokemon.CurrentHp = newPokemon.maxHp;
 
         newPokemon.power = newPokemon.level * 5 + Random.Range(-10, 11);
         if (newPokemon.power < 5) newPokemon.power = 5;
