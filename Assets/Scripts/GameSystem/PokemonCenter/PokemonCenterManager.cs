@@ -23,6 +23,7 @@ public class PokemonCenterManager : MonoBehaviour
 
     private IEnumerator GetRandomPokemonCoroutine()
     {
+        InputIndicator.Instance.HideAllIndicator();
         string sentence = "";
         for (int i = 3; i > 0; i--)
         {
@@ -42,6 +43,7 @@ public class PokemonCenterManager : MonoBehaviour
             DialogueManager.Instance.ShowForceDialogue($"완료: Lv.{newPokemon.level} {newPokemon.name}을(를) 획득했습니다!");
         }
 
+        InputIndicator.Instance.ShowIndicatorNoDefault(new ActionGuide(KeyCode.E, "확인"));
         yield return new WaitUntil(() => Input.GetKeyDown(KeyCode.E));
 
         DialogueManager.Instance.HideForceDialogue();
@@ -60,6 +62,7 @@ public class PokemonCenterManager : MonoBehaviour
     private IEnumerator PokemonRemoveCoroutine()
     {
         PlayerController.Instance.DisableInput();
+        InputIndicator.Instance.HideAllIndicator();
 
         pokemonRemoveScreen.SetActive(true);
         pokemonSelectPanel.Set(playerTrainer);
@@ -82,6 +85,7 @@ public class PokemonCenterManager : MonoBehaviour
 
     private IEnumerator HealPlayerOwnAllPokemonsCoroutine()
     {
+        InputIndicator.Instance.HideAllIndicator();
         playerTrainer.ownPokemons.ForEach(p =>
         {
             p.currentHp = p.maxHp;
@@ -97,6 +101,7 @@ public class PokemonCenterManager : MonoBehaviour
 
         DialogueManager.Instance.ShowForceDialogue("치료가 완료되었습니다!");
 
+        InputIndicator.Instance.ShowIndicatorNoDefault(new ActionGuide(KeyCode.E, "확인"));
         yield return new WaitUntil(() => Input.GetKeyDown(KeyCode.E));
 
         DialogueManager.Instance.HideForceDialogue();

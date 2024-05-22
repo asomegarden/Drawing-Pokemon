@@ -11,7 +11,6 @@ public class PlayerController : HumanController
     private Vector3 lookDirection;
     private InteractObject currentInteractable;
     private bool hasInteract = false;
-    public TextMeshProUGUI inputIndicateText;
     private bool inputEnabled = true;
 
     public PokemonTrainer trainer;
@@ -41,9 +40,9 @@ public class PlayerController : HumanController
         {
             if (Input.GetKeyDown(currentInteractable.triggerKey))
             {
+                InputIndicator.Instance.HideIndicator();
                 currentInteractable.TriggerInteraction();
                 currentInteractable = null;
-                inputIndicateText.text = "";
             }
         }
 
@@ -68,7 +67,7 @@ public class PlayerController : HumanController
         {
             hasInteract = false;
             currentInteractable = null;
-            inputIndicateText.text = "";
+            InputIndicator.Instance.HideIndicator();
             lookDirection = moveDirection;
             MoveCommand(moveDirection);
         }
@@ -82,7 +81,7 @@ public class PlayerController : HumanController
         if (collider != null)
         {
             currentInteractable = collider.GetComponent<InteractObject>();
-            inputIndicateText.text = $"{currentInteractable.interactionName}[{currentInteractable.triggerKey}]";
+            InputIndicator.Instance.ShowIndicator(new ActionGuide(currentInteractable.triggerKey, currentInteractable.interactionName));
         }
     }
 

@@ -29,6 +29,7 @@ public class DialogueManager : MonoBehaviour
 
     public void StartDialogue(Dialogue dialogue)
     {
+        InputIndicator.Instance.ShowIndicatorNoDefault(new ActionGuide(KeyCode.E, "¥Ÿ¿Ω"));
         isDialogueShowing = true;
         dialoguePanel.SetActive(true);
         sentences.Clear();
@@ -87,11 +88,10 @@ public class DialogueManager : MonoBehaviour
 
     void EndDialogue()
     {
+        InputIndicator.Instance.HideIndicator();
         isDialogueShowing = false;
         dialoguePanel.SetActive(false);
         PlayerController.Instance.EnableInput();
         currentDialogueEndEvent?.Invoke();
     }
-
-
 }

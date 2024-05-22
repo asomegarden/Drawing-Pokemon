@@ -76,6 +76,7 @@ public class BattleManager : MonoBehaviour
     public IEnumerator BattleLoop()
     {
         // Init
+        InputIndicator.Instance.HideAllIndicator();
         isBattleLoop = true;
 
         dialogueText.text = "";
@@ -258,6 +259,8 @@ public class BattleManager : MonoBehaviour
             else actionSelectCursors[i].SetActive(false);
         }
 
+        InputIndicator.Instance.ShowIndicatorNoDefault(new ActionGuide(KeyCode.E, "선택"));
+
         while (!Input.GetKeyDown(KeyCode.E))
         {
             float input = Input.GetAxisRaw("Horizontal");
@@ -289,6 +292,7 @@ public class BattleManager : MonoBehaviour
             yield return null;
         }
 
+        InputIndicator.Instance.HideAllIndicator();
         actionSelectPanel.SetActive(false);
     }
 
@@ -331,6 +335,8 @@ public class BattleManager : MonoBehaviour
 
     private IEnumerator SelectPokemon()
     {
+        InputIndicator.Instance.ShowIndicatorNoDefault(new ActionGuide(KeyCode.E, "선택"));
+
         pokemonSelectPanel.gameObject.SetActive(true);
         dialogueText.text = "";
         actionSelectPanel.gameObject.SetActive(false);
@@ -344,6 +350,8 @@ public class BattleManager : MonoBehaviour
 
         pokemonSelectPanel.gameObject.SetActive(false);
 
+        InputIndicator.Instance.HideAllIndicator();
+
         yield return PlayerSentOut(pokemonSelectPanel.selectedPokemon);
     }
 
@@ -351,11 +359,14 @@ public class BattleManager : MonoBehaviour
     {
         battleScreenPanel.SetActive(false);
         PlayerController.Instance.EnableInput();
+        InputIndicator.Instance.ShowIndicator();
     }
 
     private IEnumerator DefeatEnemy()
     {
         dialogueText.text = "말도 안돼! 내가 지다니!";
+
+        InputIndicator.Instance.ShowIndicatorNoDefault(new ActionGuide(KeyCode.E, "종료"));
 
         yield return new WaitUntil(() => Input.GetKeyDown(KeyCode.E) == true);
 
@@ -366,6 +377,8 @@ public class BattleManager : MonoBehaviour
     {
         dialogueText.text = $"{enemy.name}에게 지고말았다..";
 
+        InputIndicator.Instance.ShowIndicatorNoDefault(new ActionGuide(KeyCode.E, "종료"));
+
         yield return new WaitUntil(() => Input.GetKeyDown(KeyCode.E) == true);
 
         isBattleLoop = false;
@@ -375,7 +388,8 @@ public class BattleManager : MonoBehaviour
     {
         yield return new WaitForSeconds(0.25f);
         dialogueText.text = $"{enemy.name}에게서 도망쳤다.";
-        
+        InputIndicator.Instance.ShowIndicatorNoDefault(new ActionGuide(KeyCode.E, "종료"));
+
         yield return new WaitUntil(() => Input.GetKeyDown(KeyCode.E) == true);
 
         isBattleLoop = false;
