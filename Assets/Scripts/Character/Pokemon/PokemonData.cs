@@ -5,5 +5,6 @@ public class PokemonData : ScriptableObject
 {
     public string pokemonName;
     public Type type;
-    public Sprite portrait;
+    public Sprite frontPortrait;
+    public Sprite behindPortrait;
 }

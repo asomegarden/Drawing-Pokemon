@@ -212,7 +212,7 @@ public class BattleManager : MonoBehaviour
         yield return new WaitForSeconds(1f);
 
         enemyPokemonPortraitImage.gameObject.SetActive(true);
-        enemyPokemonPortraitImage.sprite = pokemon.portrait;
+        enemyPokemonPortraitImage.sprite = pokemon.frontPortrait;
 
         yield return new WaitForSeconds(1f);
 
@@ -239,7 +239,7 @@ public class BattleManager : MonoBehaviour
         yield return new WaitForSeconds(1f);
 
         playerPokemonPortraitImage.gameObject.SetActive(true);
-        playerPokemonPortraitImage.sprite = pokemon.portrait;
+        playerPokemonPortraitImage.sprite = pokemon.behindPortrait;
 
         yield return new WaitForSeconds(1f);
 

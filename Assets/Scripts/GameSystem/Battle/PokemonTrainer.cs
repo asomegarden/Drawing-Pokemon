@@ -6,6 +6,7 @@ using UnityEngine.UIElements;
 public class PokemonTrainer : MonoBehaviour
 {
     public new string name;
+    public int level;
     public Sprite portrait;
     public List<Pokemon> ownPokemons = new List<Pokemon>();
 

@@ -14,4 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pokemonName: "\uAF2C\uC9C0\uBAA8"
   type: 6
-  portrait: {fileID: 1669708502, guid: 47cff00413ec78e4ca7fd26ce1ba54f8, type: 3}
+  frontPortrait: {fileID: -178335542, guid: d1ad9d4cb4e752c478f8ba937abf0f14, type: 3}
+  behindPortrait: {fileID: 1470078485, guid: d1ad9d4cb4e752c478f8ba937abf0f14, type: 3}
