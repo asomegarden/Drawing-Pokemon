@@ -13,6 +13,8 @@ public class PlayerController : HumanController
     private bool hasInteract = false;
     private bool inputEnabled = true;
 
+    public bool InputEnabled { get { return inputEnabled; } }
+
     public PokemonTrainer trainer;
 
     private void Awake()
