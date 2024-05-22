@@ -9,6 +9,17 @@ public class PokemonTrainer : MonoBehaviour
     public int level;
     public Sprite portrait;
     public List<Pokemon> ownPokemons = new List<Pokemon>();
+    public TrainerData data;
+
+    private void Start()
+    {
+        if(data != null)
+        {
+            this.name = data.name;
+            this.portrait = data.portrait;
+            GetComponent<SpriteRenderer>().sprite = data.sprite;
+        }
+    }
 
     public void TriggerBattle()
     {

@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d5f67d3a324c8e408f42875e7c09f05, type: 3}
+  m_Name: "\uD034\uC988\uB9C8\uC2A4\uD130 \uAC15\uC5F0"
+  m_EditorClassIdentifier: 
+  trainerName: "\uD034\uC988\uB9C8\uC2A4\uD130 \uAC15\uC5F0"
+  sprite: {fileID: 1970551338, guid: 1f9a3a76bed8bc44dabe4fbeb7205309, type: 3}
+  portrait: {fileID: 1676411908, guid: 3f16574e3bef04a4f8dde5a8328dcead, type: 3}
