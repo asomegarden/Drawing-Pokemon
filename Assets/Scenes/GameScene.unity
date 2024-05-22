@@ -634,22 +634,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   name: "\uB808\uB4DC"
+  level: 1
   portrait: {fileID: -996881374, guid: 47cff00413ec78e4ca7fd26ce1ba54f8, type: 3}
-  ownPokemons:
-  - name: "\uAF2C\uBD80\uAE30"
-    level: 1
-    maxHp: 15
-    currentHp: 15
-    power: 5
-    type: 1
-    portrait: {fileID: 1669708502, guid: 47cff00413ec78e4ca7fd26ce1ba54f8, type: 3}
-  - name: "\uD30C\uC774\uB9AC"
-    level: 1
-    maxHp: 10
-    currentHp: 10
-    power: 5
-    type: 0
-    portrait: {fileID: 1669708502, guid: 47cff00413ec78e4ca7fd26ce1ba54f8, type: 3}
+  ownPokemons: []
 --- !u!1 &49415655
 GameObject:
   m_ObjectHideFlags: 0
@@ -960,7 +947,8 @@ MonoBehaviour:
     currentHp: 0
     power: 5
     type: 0
-    portrait: {fileID: 0}
+    frontPortrait: {fileID: 0}
+    behindPortrait: {fileID: 0}
   playerPokemon:
     name: 
     level: 0
@@ -968,7 +956,8 @@ MonoBehaviour:
     currentHp: 0
     power: 5
     type: 0
-    portrait: {fileID: 0}
+    frontPortrait: {fileID: 0}
+    behindPortrait: {fileID: 0}
   enemyPortraitImage: {fileID: 306313928}
   playerPortraitImage: {fileID: 1505280966}
   enemyPokemonPortraitImage: {fileID: 1617474379}
@@ -3292,7 +3281,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -16, y: 0}
+  m_AnchoredPosition: {x: -15, y: 0}
   m_SizeDelta: {x: 48, y: 56}
   m_Pivot: {x: 1, y: 1}
 --- !u!114 &306313928
@@ -5239,7 +5228,8 @@ MonoBehaviour:
     currentHp: 0
     power: 5
     type: 0
-    portrait: {fileID: 0}
+    frontPortrait: {fileID: 0}
+    behindPortrait: {fileID: 0}
   isSelected: 0
 --- !u!114 &502949740
 MonoBehaviour:
@@ -8972,7 +8962,7 @@ GameObject:
   - component: {fileID: 734742164}
   - component: {fileID: 734742163}
   m_Layer: 7
-  m_Name: NPC
+  m_Name: Pokemon Trainer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9189,22 +9179,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   name: "\uC2E4\uBC84"
+  level: 1
   portrait: {fileID: 994635202, guid: 47cff00413ec78e4ca7fd26ce1ba54f8, type: 3}
-  ownPokemons:
-  - name: "\uD30C\uC774\uB9AC"
-    level: 1
-    maxHp: 10
-    currentHp: 10
-    power: 5
-    type: 0
-    portrait: {fileID: -750828718, guid: 47cff00413ec78e4ca7fd26ce1ba54f8, type: 3}
-  - name: "\uAF2C\uBD80\uAE30"
-    level: 1
-    maxHp: 15
-    currentHp: 15
-    power: 5
-    type: 1
-    portrait: {fileID: -750828718, guid: 47cff00413ec78e4ca7fd26ce1ba54f8, type: 3}
+  ownPokemons: []
 --- !u!1 &738494822
 GameObject:
   m_ObjectHideFlags: 0
@@ -59743,7 +59720,8 @@ MonoBehaviour:
     currentHp: 0
     power: 5
     type: 0
-    portrait: {fileID: 0}
+    frontPortrait: {fileID: 0}
+    behindPortrait: {fileID: 0}
   isSelected: 0
 --- !u!1 &1501301289
 GameObject:
@@ -61587,8 +61565,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -16, y: 0}
-  m_SizeDelta: {x: 48, y: 48}
+  m_AnchoredPosition: {x: -15, y: 0}
+  m_SizeDelta: {x: 56, y: 56}
   m_Pivot: {x: 1, y: 1}
 --- !u!114 &1617474379
 MonoBehaviour:
@@ -61610,7 +61588,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: -750828718, guid: 47cff00413ec78e4ca7fd26ce1ba54f8, type: 3}
+  m_Sprite: {fileID: 1240707050, guid: d1ad9d4cb4e752c478f8ba937abf0f14, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -69248,6 +69226,9 @@ MonoBehaviour:
   - {fileID: 11400000, guid: c89086756b6c0004c816d47f85f408a6, type: 2}
   - {fileID: 11400000, guid: 9606475de5cab6542aadb6807534b96c, type: 2}
   pokemons: []
+  trainers:
+  - {fileID: 24209061}
+  - {fileID: 734742167}
 --- !u!1 &2129257850
 GameObject:
   m_ObjectHideFlags: 0

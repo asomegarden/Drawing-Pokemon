@@ -8,6 +8,8 @@ public class PokemonManager : MonoBehaviour
     public List<PokemonData> pokemonDatas;
     public List<Pokemon> pokemons = new List<Pokemon>();
 
+    public List<PokemonTrainer> trainers = new List<PokemonTrainer>();
+
     private void Awake()
     {
         if(Instance == null) Instance = this;
@@ -16,6 +18,7 @@ public class PokemonManager : MonoBehaviour
     void Start()
     {
         InitializePokemons();
+        InitializeTrainers();
     }
 
     void InitializePokemons()
@@ -27,13 +30,35 @@ public class PokemonManager : MonoBehaviour
         }
     }
 
+    void InitializeTrainers()
+    {
+        foreach (var trainer in trainers)
+        {
+            int pokemonCount = Random.Range(1, 4);
+            for(int i=0; i< pokemonCount; i++)
+            {
+                int level = trainer.level + Random.Range(-5, 6);
+                if (level < 1) level = 1;
+                else if (level > 100) level = 100;
+
+                trainer.ownPokemons.Add(GetRandomPokemon(level));
+            }
+        }
+    }
+
     public Pokemon GetRandomPokemon()
+    {
+        int level = Random.Range(1, 101);
+        return GetRandomPokemon(level);
+    }
+
+    public Pokemon GetRandomPokemon(int level)
     {
         Pokemon newPokemon = new Pokemon(pokemons[Random.Range(0, pokemons.Count)]);
 
-        newPokemon.level = Random.Range(1, 101);
+        newPokemon.level = level;
         newPokemon.maxHp = newPokemon.level * 10 + Random.Range(-20, 21);
-        if(newPokemon.maxHp < 5) newPokemon.maxHp = 5;
+        if (newPokemon.maxHp < 5) newPokemon.maxHp = 5;
         newPokemon.currentHp = newPokemon.maxHp;
 
         newPokemon.power = newPokemon.level * 5 + Random.Range(-10, 11);

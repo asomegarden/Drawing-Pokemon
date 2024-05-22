@@ -12,13 +12,15 @@ public class Pokemon
     public int currentHp;
     public int power = 5;
     public Type type;
-    public Sprite portrait;
+    public Sprite frontPortrait;
+    public Sprite behindPortrait;
 
     public Pokemon(PokemonData data)
     {
         this.name = data.name;
         this.type = data.type;
-        this.portrait = data.portrait;
+        this.frontPortrait = data.frontPortrait;
+        this.behindPortrait = data.behindPortrait;
         this.level = 0;
         this.maxHp = 0;
         this.currentHp = 0;
@@ -29,7 +31,8 @@ public class Pokemon
     {
         this.name = pokemon.name;
         this.type = pokemon.type;
-        this.portrait = pokemon.portrait;
+        this.frontPortrait = pokemon.frontPortrait;
+        this.behindPortrait = pokemon.behindPortrait;
         this.level = pokemon.level;
         this.maxHp = pokemon.maxHp;
         this.currentHp = pokemon.currentHp;
