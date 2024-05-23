@@ -7,6 +7,7 @@ using UnityEngine.UI;
 public class ToolButton : MonoBehaviour
 {
     public GameObject panel;
+
     void Start()
     {
         Button btn = GetComponent<Button>();
