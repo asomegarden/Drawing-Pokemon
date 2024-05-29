@@ -31,6 +31,9 @@ public class Painter : MonoBehaviour
 
     private int[][] colorPreset;
 
+    public bool isActive = false;
+    public Texture2D resultImage = null;
+
     void Start()
     {
         texture = new Texture2D((int)drawingCanvas.rectTransform.rect.width, (int)drawingCanvas.rectTransform.rect.height);
@@ -70,6 +73,18 @@ public class Painter : MonoBehaviour
         colorPreset[14] = new int[] { 112, 146, 190 };
         colorPreset[15] = new int[] { 163, 73, 164 };
         #endregion
+    }
+
+    private void OnEnable()
+    {
+        isActive = true;
+        resultImage = null;
+    }
+
+    private void OnDisable()
+    {
+        isActive = false;
+        resultImage = null;
     }
 
     void Update()
@@ -256,7 +271,7 @@ public class Painter : MonoBehaviour
     }
     void OnFinishClick()
     {
-        //완성된 이미지. texture2D형식에서 변환하여 전달
-        Texture2D image = texture;
+        resultImage = texture;
+        isActive = false;
     }
 }

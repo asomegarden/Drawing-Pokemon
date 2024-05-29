@@ -1,36 +1,41 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Networking;
+using UnityEngine.SceneManagement;
 
 public class PokemonCenterManager : MonoBehaviour
 {
     public static PokemonCenterManager Instance {  get; private set; }
 
-    public PokemonTrainer playerTrainer;
     public GameObject pokemonRemoveScreen;
     public PokemonSelectPanel pokemonSelectPanel;
 
+
     private void Awake()
     {
-        if(Instance == null)Instance = this;
-    }
-
-    public void GetRandomPokemon()
-    {
-        StartCoroutine(GetRandomPokemonCoroutine());
-    }
-
-    private IEnumerator GetRandomPokemonCoroutine()
-    {
-        InputIndicator.Instance.HideAllIndicator();
-        string sentence = "";
-        for (int i = 3; i > 0; i--)
+        if (Instance == null)
         {
-            sentence += $"{i}..";
-            DialogueManager.Instance.ShowForceDialogue(sentence);
-            yield return new WaitForSeconds(1f);
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
         }
+        else if (Instance != this)
+        {
+            Destroy(gameObject);
+        }
+    }
+
+    public void DrawPokemon()
+    {
+        StartCoroutine(DrawPokemonCoroutine());
+    }
+
+    private IEnumerator DrawPokemonCoroutine()
+    {
+        PokemonTrainer playerTrainer = PlayerManager.Instance.playerTrainerInfo;
+        InputIndicator.Instance.HideAllIndicator();
 
         if(playerTrainer.ownPokemons.Count == 6)
         {
@@ -38,9 +43,48 @@ public class PokemonCenterManager : MonoBehaviour
         }
         else
         {
-            Pokemon newPokemon = PokemonManager.Instance.GetRandomPokemon();
-            playerTrainer.ownPokemons.Add(newPokemon);
-            DialogueManager.Instance.ShowForceDialogue($"완료: Lv.{newPokemon.level} {newPokemon.name}을(를) 획득했습니다!");
+            PainterManager.Instance.EnablePainter();
+            Painter painter = PainterManager.Instance.painter;
+            yield return new WaitUntil(() => painter.isActive == false);
+
+            Texture2D pokemonImage = painter.resultImage;
+
+            PainterManager.Instance.DisablePainter();
+            DialogueManager.Instance.ShowForceDialogue("이미지 분석중");
+
+            yield return new WaitForSeconds(1f);
+            string sentence = "";
+            for (int i = 3; i > 0; i--)
+            {
+                sentence += $"{i}..";
+                DialogueManager.Instance.ShowForceDialogue(sentence);
+                yield return new WaitForSeconds(1f);
+            }
+
+            if (pokemonImage == null)
+            {
+                Debug.LogError("이미지가 없습니다.");
+                yield break;
+            }
+
+            byte[] imageBytes = pokemonImage.EncodeToPNG();
+            WWWForm form = new WWWForm();
+            form.AddBinaryData("file", imageBytes, "image.png", "image/png");
+
+            using (UnityWebRequest www = UnityWebRequest.Post("http://39.124.11.92:50000/which_pokemon", form))
+            {
+                yield return www.SendWebRequest();
+
+                if (www.result != UnityWebRequest.Result.Success)
+                {
+                    Debug.LogError($"서버 요청 오류: {www.error}");
+                }
+                else
+                {
+                    string jsonResponse = www.downloadHandler.text;
+                    Debug.Log($"서버 응답: {jsonResponse}");
+                }
+            }
         }
 
         InputIndicator.Instance.ShowIndicatorNoDefault(new ActionGuide(KeyCode.E, "확인"));
@@ -63,6 +107,7 @@ public class PokemonCenterManager : MonoBehaviour
     {
         PlayerController.Instance.DisableInput();
         InputIndicator.Instance.HideAllIndicator();
+        PokemonTrainer playerTrainer = PlayerManager.Instance.playerTrainerInfo;
 
         pokemonRemoveScreen.SetActive(true);
         pokemonSelectPanel.Set(playerTrainer);
@@ -86,7 +131,7 @@ public class PokemonCenterManager : MonoBehaviour
     private IEnumerator HealPlayerOwnAllPokemonsCoroutine()
     {
         InputIndicator.Instance.HideAllIndicator();
-        playerTrainer.ownPokemons.ForEach(p =>
+        PlayerManager.Instance.playerTrainerInfo.ownPokemons.ForEach(p =>
         {
             p.CurrentHp = p.maxHp;
         });

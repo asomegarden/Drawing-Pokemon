@@ -15,8 +15,6 @@ public class PlayerController : HumanController
 
     public bool InputEnabled { get { return inputEnabled; } }
 
-    public PokemonTrainer trainer;
-
     private void Awake()
     {
         if (Instance == null) Instance = this;
