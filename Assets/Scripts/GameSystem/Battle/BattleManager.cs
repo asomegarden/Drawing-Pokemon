@@ -44,6 +44,7 @@ public class BattleManager : MonoBehaviour
 
     public void StartBattle(PokemonTrainer enemy)
     {
+        player = PlayerManager.Instance.playerTrainerInfo;
         if(player.AutoSentOutPokemon() == null)
         {
             Dialogue dialogue = new Dialogue();

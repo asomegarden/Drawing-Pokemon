@@ -63,7 +63,7 @@ public class UIManager : MonoBehaviour
         InputIndicator.Instance.ShowIndicatorNoDefault(new ActionGuide(KeyCode.Escape, "´Ý±â"));
 
         pokemonPanel.gameObject.SetActive(true);
-        pokemonPanel.Set(PlayerController.Instance.trainer);
+        pokemonPanel.Set(PlayerManager.Instance.playerTrainerInfo);
     }
 
     public void HidePokemonPanel()
