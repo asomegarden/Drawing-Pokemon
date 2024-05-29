@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5d5f5c9801671a24ba0f43ad0b6a1327, type: 3}
   m_Name: "\uC8FC\uBC43"
   m_EditorClassIdentifier: 
+  id: Zubat
   pokemonName: "\uC8FC\uBC43"
   type: 5
   frontPortrait: {fileID: -225595430, guid: d1ad9d4cb4e752c478f8ba937abf0f14, type: 3}

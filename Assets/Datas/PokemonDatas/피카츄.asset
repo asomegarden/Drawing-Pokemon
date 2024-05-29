@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5d5f5c9801671a24ba0f43ad0b6a1327, type: 3}
   m_Name: "\uD53C\uCE74\uCE04"
   m_EditorClassIdentifier: 
+  id: Pikachu
   pokemonName: "\uD53C\uCE74\uCE04"
   type: 7
   frontPortrait: {fileID: 1623755881, guid: d1ad9d4cb4e752c478f8ba937abf0f14, type: 3}

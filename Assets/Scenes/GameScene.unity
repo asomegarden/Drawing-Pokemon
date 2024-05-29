@@ -1163,6 +1163,7 @@ MonoBehaviour:
   enemy: {fileID: 0}
   player: {fileID: 0}
   enemyPokemon:
+    id: 
     name: 
     level: 0
     maxHp: 0
@@ -1171,6 +1172,7 @@ MonoBehaviour:
     frontPortrait: {fileID: 0}
     behindPortrait: {fileID: 0}
   playerPokemon:
+    id: 
     name: 
     level: 0
     maxHp: 0
@@ -7961,6 +7963,7 @@ MonoBehaviour:
   - {fileID: 920740879}
   - {fileID: 648072216}
   selectedPokemon:
+    id: 
     name: 
     level: 0
     maxHp: 0
@@ -83430,7 +83433,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dialogue:
     sentences:
-    - "\uC815\uBCF4: \uBB34\uC791\uC704 \uD3EC\uCF13\uBAAC\uC744 \uD68D\uB4DD\uD569\uB2C8\uB2E4."
+    - "\uC6D0\uD558\uB294 \uD3EC\uCF13\uBAAC\uC744 \uADF8\uB824\uBCF4\uC138\uC694"
     dialogueEndEvent:
       m_PersistentCalls:
         m_Calls:
@@ -85296,6 +85299,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pokemonRemoveScreen: {fileID: 1434902232}
   pokemonSelectPanel: {fileID: 502949739}
+  scoreThreshold: 0.4
 --- !u!4 &1368119911
 Transform:
   m_ObjectHideFlags: 0
@@ -86808,6 +86812,7 @@ MonoBehaviour:
   - {fileID: 137246166}
   - {fileID: 1520279256}
   selectedPokemon:
+    id: 
     name: 
     level: 0
     maxHp: 0

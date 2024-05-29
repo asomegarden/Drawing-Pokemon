@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5d5f5c9801671a24ba0f43ad0b6a1327, type: 3}
   m_Name: "\uBC30\uB8E8\uD0A4"
   m_EditorClassIdentifier: 
+  id: Tyrogue
   pokemonName: "\uBC30\uB8E8\uD0A4"
   type: 9
   frontPortrait: {fileID: -1777106533, guid: d1ad9d4cb4e752c478f8ba937abf0f14, type: 3}
