@@ -10,6 +10,7 @@ using Unity.Mathematics;
 
 public class Painter : MonoBehaviour
 {
+    public Canvas parentCanvas;
     public RawImage drawingCanvas;
     public Color brushColor = Color.black;
     public float brushSize = 1.0f;
@@ -50,6 +51,7 @@ public class Painter : MonoBehaviour
         buttons[3].onClick.AddListener(SaveDrawingToTexture);
         buttons[4].onClick.AddListener(LoadDrawing);
         buttons[5].onClick.AddListener(OnFinishClick);
+        buttons[6].onClick.AddListener(ClearCanvas);
         #region colprPreset
         for (int i = 0; i < colorButtons.Length; i++)
         {
@@ -125,8 +127,8 @@ public class Painter : MonoBehaviour
     void DrawLine(Vector2 start, Vector2 end)
     {
         if (isFilling) return;
-        RectTransformUtility.ScreenPointToLocalPointInRectangle(drawingCanvas.rectTransform, start, null, out Vector2 localStart);
-        RectTransformUtility.ScreenPointToLocalPointInRectangle(drawingCanvas.rectTransform, end, null, out Vector2 localEnd);
+        RectTransformUtility.ScreenPointToLocalPointInRectangle(drawingCanvas.rectTransform, start, parentCanvas.worldCamera, out Vector2 localStart);
+        RectTransformUtility.ScreenPointToLocalPointInRectangle(drawingCanvas.rectTransform, end, parentCanvas.worldCamera, out Vector2 localEnd);
 
         int x0 = Mathf.FloorToInt(localStart.x + drawingCanvas.rectTransform.rect.width / 2);
         int y0 = Mathf.FloorToInt(localStart.y + drawingCanvas.rectTransform.rect.height / 2);
@@ -173,7 +175,7 @@ public class Painter : MonoBehaviour
         if (rect.Contains(mousePos))
         {
             Vector2 localPoint;
-            RectTransformUtility.ScreenPointToLocalPointInRectangle(drawingCanvas.rectTransform, mousePos, null, out localPoint);
+            RectTransformUtility.ScreenPointToLocalPointInRectangle(drawingCanvas.rectTransform, mousePos, parentCanvas.worldCamera, out localPoint);
             int x = (int)mousePos.x;
             int y = (int)mousePos.y;
             FloodFill(x, y, texture.GetPixel(x+80, y+80), brushColor);
@@ -248,6 +250,7 @@ public class Painter : MonoBehaviour
         colorSlider[1].value = brushColor.g;
         colorSlider[2].value = brushColor.b;
     }
+
     private void OnPaintClick()
     {
         isFilling = true;
