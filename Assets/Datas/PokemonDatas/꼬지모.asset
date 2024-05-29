@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5d5f5c9801671a24ba0f43ad0b6a1327, type: 3}
   m_Name: "\uAF2C\uC9C0\uBAA8"
   m_EditorClassIdentifier: 
+  id: Sudowoodo
   pokemonName: "\uAF2C\uC9C0\uBAA8"
   type: 6
   frontPortrait: {fileID: -178335542, guid: d1ad9d4cb4e752c478f8ba937abf0f14, type: 3}

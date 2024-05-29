@@ -7,6 +7,7 @@ using UnityEngine;
 [Serializable]
 public class Pokemon
 {
+    public string id;
     public string name;
     public int level;
     public int maxHp;
@@ -65,6 +66,7 @@ public class Pokemon
 
     public Pokemon(PokemonData data)
     {
+        this.id = data.id;
         this.name = data.name;
         this.type = data.type;
         this.frontPortrait = data.frontPortrait;
@@ -77,6 +79,7 @@ public class Pokemon
 
     public Pokemon(Pokemon pokemon)
     {
+        this.id = pokemon.id;
         this.name = pokemon.name;
         this.type = pokemon.type;
         this.frontPortrait = pokemon.frontPortrait;

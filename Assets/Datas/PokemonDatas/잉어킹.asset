@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5d5f5c9801671a24ba0f43ad0b6a1327, type: 3}
   m_Name: "\uC789\uC5B4\uD0B9"
   m_EditorClassIdentifier: 
+  id: Magikarp
   pokemonName: "\uC789\uC5B4\uD0B9"
   type: 1
   frontPortrait: {fileID: 334457115, guid: d1ad9d4cb4e752c478f8ba937abf0f14, type: 3}

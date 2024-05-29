@@ -8,6 +8,7 @@ public class PokemonManager : MonoBehaviour
     public List<PokemonData> pokemonDatas;
     public List<Pokemon> pokemons = new List<Pokemon>();
 
+    public Dictionary<string, Pokemon> pokemonDict = new Dictionary<string, Pokemon>();
     public List<PokemonTrainer> trainers = new List<PokemonTrainer>();
 
     private void Awake()
@@ -35,6 +36,7 @@ public class PokemonManager : MonoBehaviour
         {
             Pokemon pokemon = new Pokemon(data);
             pokemons.Add(pokemon);
+            pokemonDict.Add(pokemon.id, pokemon);
         }
     }
 
@@ -64,14 +66,24 @@ public class PokemonManager : MonoBehaviour
     {
         Pokemon newPokemon = new Pokemon(pokemons[Random.Range(0, pokemons.Count)]);
 
-        newPokemon.level = level;
-        newPokemon.maxHp = newPokemon.level * 10 + Random.Range(-10, 11);
-        if (newPokemon.maxHp < 10) newPokemon.maxHp = 10;
-        newPokemon.CurrentHp = newPokemon.maxHp;
+        return GetPokemon(newPokemon, level);
+    }
 
-        newPokemon.power = (int)(level * 2.5) + Random.Range(-2, 3);
-        if (newPokemon.power < 5) newPokemon.power = 5;
+    public Pokemon GetPokemon(string id, int level)
+    {
+        return GetPokemon(pokemonDict[id], level);
+    }
 
-        return newPokemon;
+    public Pokemon GetPokemon(Pokemon pokemon, int level)
+    {
+        pokemon.level = level;
+        pokemon.maxHp = pokemon.level * 10 + Random.Range(-10, 11);
+        if (pokemon.maxHp < 10) pokemon.maxHp = 10;
+        pokemon.CurrentHp = pokemon.maxHp;
+
+        pokemon.power = (int)(level * 2.5) + Random.Range(-2, 3);
+        if (pokemon.power < 5) pokemon.power = 5;
+
+        return pokemon;
     }
 }

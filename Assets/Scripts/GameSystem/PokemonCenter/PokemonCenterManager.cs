@@ -13,6 +13,7 @@ public class PokemonCenterManager : MonoBehaviour
     public GameObject pokemonRemoveScreen;
     public PokemonSelectPanel pokemonSelectPanel;
 
+    public float scoreThreshold = 0.4f;
 
     private void Awake()
     {
@@ -50,22 +51,8 @@ public class PokemonCenterManager : MonoBehaviour
             Texture2D pokemonImage = painter.resultImage;
 
             PainterManager.Instance.DisablePainter();
+            InputIndicator.Instance.HideAllIndicator();
             DialogueManager.Instance.ShowForceDialogue("이미지 분석중");
-
-            yield return new WaitForSeconds(1f);
-            string sentence = "";
-            for (int i = 3; i > 0; i--)
-            {
-                sentence += $"{i}..";
-                DialogueManager.Instance.ShowForceDialogue(sentence);
-                yield return new WaitForSeconds(1f);
-            }
-
-            if (pokemonImage == null)
-            {
-                Debug.LogError("이미지가 없습니다.");
-                yield break;
-            }
 
             byte[] imageBytes = pokemonImage.EncodeToPNG();
             WWWForm form = new WWWForm();
@@ -82,7 +69,22 @@ public class PokemonCenterManager : MonoBehaviour
                 else
                 {
                     string jsonResponse = www.downloadHandler.text;
-                    Debug.Log($"서버 응답: {jsonResponse}");
+                    var result = JsonUtility.FromJson<PokemonResponse>(jsonResponse);
+                    
+                    if(scoreThreshold < result.score)
+                    {
+                        float score = result.score - scoreThreshold;
+                        score /= (1f - scoreThreshold);
+                        int level = (int)(score * 100);
+                        Pokemon pokemon = PokemonManager.Instance.GetPokemon(result.pokemon, level);
+                        playerTrainer.ownPokemons.Add(pokemon);
+
+                        DialogueManager.Instance.ShowForceDialogue($"Lv.{pokemon.level} {pokemon.name}을(를) 획득했습니다!");
+                    }
+                    else
+                    {
+                        DialogueManager.Instance.ShowForceDialogue("그림을 식별할 수 없습니다..");
+                    }
                 }
             }
         }
@@ -151,4 +153,11 @@ public class PokemonCenterManager : MonoBehaviour
 
         DialogueManager.Instance.HideForceDialogue();
     }
+}
+
+[Serializable]
+public class PokemonResponse
+{
+    public string pokemon;
+    public float score;
 }
