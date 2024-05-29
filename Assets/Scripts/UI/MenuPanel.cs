@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class MenuPanel : MonoBehaviour
 {
@@ -9,10 +11,14 @@ public class MenuPanel : MonoBehaviour
     private int selectedIndex;
     public bool isSelected = false;
 
+    public TMP_InputField thresholdField;
+
     public void Show()
     {
         isSelected = false;
         selectedIndex = 0;
+
+        thresholdField.text = PokemonCenterManager.Instance.scoreThreshold.ToString();
 
         UpdateCursor();
 
@@ -63,6 +69,18 @@ public class MenuPanel : MonoBehaviour
         {
             if (i == selectedIndex) cursors[i].SetActive(true);
             else cursors[i].SetActive(false);
+        }
+    }
+
+    public void ChangeThreshold()
+    {
+        if(float.TryParse(thresholdField.text, out float value))
+        {
+            PokemonCenterManager.Instance.scoreThreshold = value;
+        }
+        else
+        {
+            PokemonCenterManager.Instance.scoreThreshold = 0.8f;
         }
     }
 }
